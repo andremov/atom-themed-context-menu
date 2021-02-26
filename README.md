@@ -1,4 +1,4 @@
-# themed-title-bar package
+# atom-themed-context-menu package
 
 A short description of your package.
 

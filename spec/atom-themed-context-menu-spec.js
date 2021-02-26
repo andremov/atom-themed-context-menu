@@ -1,6 +1,6 @@
 'use babel';
 
-import ThemedTitleBar from '../lib/themed-title-bar';
+import ThemedTitleBar from '../lib/atom-themed-context-menu';
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 //
@@ -12,32 +12,32 @@ describe('ThemedTitleBar', () => {
 
   beforeEach(() => {
     workspaceElement = atom.views.getView(atom.workspace);
-    activationPromise = atom.packages.activatePackage('themed-title-bar');
+    activationPromise = atom.packages.activatePackage('atom-themed-context-menu');
   });
 
-  describe('when the themed-title-bar:toggle event is triggered', () => {
+  describe('when the atom-themed-context-menu:toggle event is triggered', () => {
     it('hides and shows the modal panel', () => {
       // Before the activation event the view is not on the DOM, and no panel
       // has been created
-      expect(workspaceElement.querySelector('.themed-title-bar')).not.toExist();
+      expect(workspaceElement.querySelector('.atom-themed-context-menu')).not.toExist();
 
       // This is an activation event, triggering it will cause the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'themed-title-bar:toggle');
+      atom.commands.dispatch(workspaceElement, 'atom-themed-context-menu:toggle');
 
       waitsForPromise(() => {
         return activationPromise;
       });
 
       runs(() => {
-        expect(workspaceElement.querySelector('.themed-title-bar')).toExist();
+        expect(workspaceElement.querySelector('.atom-themed-context-menu')).toExist();
 
-        let themedTitleBarElement = workspaceElement.querySelector('.themed-title-bar');
+        let themedTitleBarElement = workspaceElement.querySelector('.atom-themed-context-menu');
         expect(themedTitleBarElement).toExist();
 
         let themedTitleBarPanel = atom.workspace.panelForItem(themedTitleBarElement);
         expect(themedTitleBarPanel.isVisible()).toBe(true);
-        atom.commands.dispatch(workspaceElement, 'themed-title-bar:toggle');
+        atom.commands.dispatch(workspaceElement, 'atom-themed-context-menu:toggle');
         expect(themedTitleBarPanel.isVisible()).toBe(false);
       });
     });
@@ -51,11 +51,11 @@ describe('ThemedTitleBar', () => {
       // workspaceElement to the DOM are generally slower than those off DOM.
       jasmine.attachToDOM(workspaceElement);
 
-      expect(workspaceElement.querySelector('.themed-title-bar')).not.toExist();
+      expect(workspaceElement.querySelector('.atom-themed-context-menu')).not.toExist();
 
       // This is an activation event, triggering it causes the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'themed-title-bar:toggle');
+      atom.commands.dispatch(workspaceElement, 'atom-themed-context-menu:toggle');
 
       waitsForPromise(() => {
         return activationPromise;
@@ -63,9 +63,9 @@ describe('ThemedTitleBar', () => {
 
       runs(() => {
         // Now we can test for view visibility
-        let themedTitleBarElement = workspaceElement.querySelector('.themed-title-bar');
+        let themedTitleBarElement = workspaceElement.querySelector('.atom-themed-context-menu');
         expect(themedTitleBarElement).toBeVisible();
-        atom.commands.dispatch(workspaceElement, 'themed-title-bar:toggle');
+        atom.commands.dispatch(workspaceElement, 'atom-themed-context-menu:toggle');
         expect(themedTitleBarElement).not.toBeVisible();
       });
     });
