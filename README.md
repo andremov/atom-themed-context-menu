@@ -5,8 +5,8 @@ A short description of your package.
 To Do:
 
 -   [x] Menu at mouse click position
--   [ ] Clamp menu position to prevent overflow
--   [ ] Dispose menu on blur
+-   [x] Clamp menu position to prevent overflow
+-   [x] Dispose menu on blur
 -   [ ] add missing actions to context menu
 -   [x] recognize dividers
 -   [x] on hover styling

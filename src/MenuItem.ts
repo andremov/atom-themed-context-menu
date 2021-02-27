@@ -6,21 +6,18 @@ export class MenuItem {
     private element: HTMLHRElement | HTMLDivElement
     private command?: string
     private commandDetail?: string
-    private emitter: EventEmitter
     private selected: boolean = false
     private parent: ThemedContextMenu
+    private height: number
 
     private constructor(
         element: HTMLHRElement | HTMLDivElement,
         parent: ThemedContextMenu,
+        height: number,
     ) {
         this.element = element
         this.parent = parent
-        this.emitter = new EventEmitter()
-
-        // this.emitter.on(TbrEvent.MOUSE_ENTER, (...args) =>
-        //     this.onSubItemMouseEnter(args[0], args[1]),
-        // )
+        this.height = height
 
         this.element.addEventListener("click", (e) =>
             this.onMouseClick(e as MouseEvent),
@@ -32,12 +29,12 @@ export class MenuItem {
         parent: ThemedContextMenu,
     ) {
         if (item.type === "separator") {
-            return new MenuItem(document.createElement("hr"), parent)
+            return new MenuItem(document.createElement("hr"), parent, 7)
         }
 
         const divElem = document.createElement("div")
         divElem.classList.add("menu-item")
-        const self = new MenuItem(divElem, parent)
+        const self = new MenuItem(divElem, parent, 23)
 
         const menuItemName = document.createElement("span")
         menuItemName.classList.add("menu-item-name")
@@ -51,7 +48,7 @@ export class MenuItem {
 
         if (item.command !== undefined) {
             self.command = item.command
-            // self.commandDetail = item.commandDetail
+            self.commandDetail = item.commandDetail
 
             const keyStrokes = atom.keymaps.findKeyBindings({
                 command: item.command,
@@ -69,19 +66,14 @@ export class MenuItem {
         return this.element
     }
 
-    private onMouseClick(e: MouseEvent) {
-        // e.stopPropagation()
-        this.execCommand()
-        this.parent.deleteContextMenu()
+    public getHeight() {
+        return this.height
     }
 
-    private onSubItemMouseEnter(target: MenuItem, e: MouseEvent): void {
-        // this.submenu?.forEach((o) => {
-        //     o.setOpen(false);
-        //     o.setSelected(false);
-        // });
-        // target.setSelected(true);
-        // target.setOpen(true);
+    private onMouseClick(e: MouseEvent) {
+        e.stopPropagation()
+        this.execCommand()
+        this.parent.deleteContextMenu()
     }
 
     public async execCommand(): Promise<void> {
