@@ -142,22 +142,22 @@
         "affectsGlobalScope": true
       },
       "./src/types.ts": {
-        "version": "fc9f9d0390c5da3c3ac1061f4ae900faf9c8aefd8517d19f7dc3cef55ad921ab",
-        "signature": "d31181f73f6346f66fb6e8ff3651da607cd5f141fb664b03339463f5f2f8d7d8",
+        "version": "3a88f33138c6bdff8d858176009d3f60a3b198f2cdf6363654844e5d17e6858d",
+        "signature": "ddba81d7427d91ec8a423c11741817e6e7684dc870490cd34a84aaff862f82c8",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "8fc1b914a57dba604be7e8855702997f6ff2759cacc459e1a2f349ee12643fb0",
-        "signature": "914e114565b48de352ee59bc8cb77dc97cb9d8c40c02f5813b1b5cdaa7ac6645",
+        "version": "21abde3cc4e0e4eeaef6c1735e3267f4652183329771f9ae766dd61479bbeea4",
+        "signature": "31631569bda9b023a8d9335c2227b4bdd0500db77f5e875bbd09058a6cdc18f1",
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
-        "version": "941e758b7bb28afd9555b58f18b5404fdd9a3d2a1bdd4d96ef70a3da43f5bf6d",
-        "signature": "0bb716757bd49c166aa834a106f6a081afbc741d86368aa4aa2708268572ce1c",
+        "version": "10f85e53f42e604b35dd8008caa9bd0ab6deed94961ee6d66302820371256ee9",
+        "signature": "6bb764f90d8812168fec60b2d8fdcef3cbd5ed7b1a41805c4941854b0bb295ee",
         "affectsGlobalScope": false
       },
       "./src/main.ts": {
-        "version": "fb76c3e7f156094e822ba80dcaff386bbeed1dbbe67ede5267ab235a9ddd30c7",
+        "version": "066ab1b2a7b43b59b0669a1a2d6209a7af1a24fc4a08615eb569f9d9b5a20080",
         "signature": "2843d6bbc50803b3a8e656341e5d520a0d86e2206f9676d2eb352568924a9d96",
         "affectsGlobalScope": false
       },
@@ -678,7 +678,8 @@
         "./node_modules/@types/node/zlib.d.ts"
       ],
       "./src/main.ts": [
-        "./src/themedcontextmenu.ts"
+        "./src/themedcontextmenu.ts",
+        "./src/types.ts"
       ],
       "./src/menuitem.ts": [
         "./node_modules/@types/node/events.d.ts",
