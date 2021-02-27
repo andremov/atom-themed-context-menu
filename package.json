@@ -1,18 +1,25 @@
 {
-  "name": "themed-context-menu",
-  "main": "./lib/main",
-  "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [
-  ],
-  "activationCommands": {
-    "atom-workspace": "themed-context-menu:toggle"
-  },
-  "repository": "https://github.com/atom/themed-context-menu",
-  "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
-  },
-  "dependencies": {
-  }
+    "name": "themed-context-menu",
+    "main": "./lib/main",
+    "version": "0.0.0",
+    "description": "A short description of your package",
+    "keywords": [],
+    "activationCommands": {
+        "atom-workspace": "themed-context-menu:toggle"
+    },
+    "scripts": {
+        "build": "node ./esbuild.config.mjs"
+    },
+    "repository": "https://github.com/atom/themed-context-menu",
+    "license": "MIT",
+    "engines": {
+        "atom": ">=1.0.0 <2.0.0"
+    },
+    "devDependencies": {
+        "@types/atom": "^1.40.4",
+        "@types/node": "^14.10.0",
+        "esbuild": "^0.8.36",
+        "node": "^14.15.2",
+        "typescript": "^4.0.2"
+    }
 }

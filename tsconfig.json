@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "declaration": false,
+        "emitDecoratorMetadata": false,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "incremental": true,
+        "inlineSourceMap": true,
+        "lib": [
+            "dom",
+            "es2015"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "outDir": "lib",
+        "preserveSymlinks": true,
+        "removeComments": true,
+        "rootDir": "src",
+        "strict": true,
+        "target": "es2016",
+        "paths": {
+            "*": ["../types/*", "./*"]
+        },
+        "typeRoots": [
+            "node_modules/@types",
+            "types"
+        ]
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
