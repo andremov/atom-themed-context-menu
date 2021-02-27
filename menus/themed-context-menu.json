@@ -2,7 +2,7 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Toggle themed-context-menu",
+        "label": "Toggle Themed Context Menu",
         "command": "themed-context-menu:toggle"
       }
     ]
@@ -12,7 +12,7 @@
       "label": "Packages",
       "submenu": [
         {
-          "label": "themed-context-menu",
+          "label": "Themed Context Menu",
           "submenu": [
             {
               "label": "Toggle",
