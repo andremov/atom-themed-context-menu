@@ -1,6 +1,6 @@
 {
     "name": "themed-context-menu",
-    "main": "./lib/main",
+    "main": "./dist/themed-context-menu",
     "version": "0.0.0",
     "description": "A short description of your package",
     "keywords": [],
