@@ -1,53 +1,57 @@
 import EventEmitter from "events"
+import { ContextMenuItem } from "./types"
+import { ThemedContextMenu } from "./ThemedContextMenu"
 
 export class MenuItem {
     private element: HTMLHRElement | HTMLDivElement
     private command?: string
+    private commandDetail?: string
     private emitter: EventEmitter
+    private selected: boolean = false
+    private parent: ThemedContextMenu
 
-    private constructor(element: HTMLHRElement | HTMLDivElement) {
+    private constructor(
+        element: HTMLHRElement | HTMLDivElement,
+        parent: ThemedContextMenu,
+    ) {
         this.element = element
+        this.parent = parent
         this.emitter = new EventEmitter()
 
-        this.emitter.on(TbrEvent.MOUSE_ENTER, (...args) =>
-            this.onSubItemMouseEnter(args[0], args[1]),
-        )
+        // this.emitter.on(TbrEvent.MOUSE_ENTER, (...args) =>
+        //     this.onSubItemMouseEnter(args[0], args[1]),
+        // )
 
         this.element.addEventListener("click", (e) =>
             this.onMouseClick(e as MouseEvent),
         )
-        this.element.addEventListener("mouseenter", (e) =>
-            this.onMouseEnter(e as MouseEvent),
-        )
     }
 
-    public static createMenuItem(item: Array) {
-        let self: MenuItem
-        let element: HTMLHRElement | HTMLDivElement
-
+    public static createMenuItem(
+        item: ContextMenuItem,
+        parent: ThemedContextMenu,
+    ) {
         if (item.type === "separator") {
-            element = document.createElement("hr")
-            self = new MenuItem(element)
-            return self
+            return new MenuItem(document.createElement("hr"), parent)
         }
 
-        const element = document.createElement("div")
-        element.classList.add("menu-item")
-        self = new MenuItem(element)
+        const divElem = document.createElement("div")
+        divElem.classList.add("menu-item")
+        const self = new MenuItem(divElem, parent)
 
         const menuItemName = document.createElement("span")
         menuItemName.classList.add("menu-item-name")
-        menuItemName.innerHTML = item.label
+        menuItemName.innerHTML = item.label ? item.label : ""
 
         const menuItemKey = document.createElement("span")
         menuItemKey.classList.add("menu-item-key")
 
-        element.appendChild(menuItemName)
-        element.appendChild(menuItemKey)
+        divElem.appendChild(menuItemName)
+        divElem.appendChild(menuItemKey)
 
         if (item.command !== undefined) {
             self.command = item.command
-            self.commandDetail = item.commandDetail
+            // self.commandDetail = item.commandDetail
 
             const keyStrokes = atom.keymaps.findKeyBindings({
                 command: item.command,
@@ -66,17 +70,9 @@ export class MenuItem {
     }
 
     private onMouseClick(e: MouseEvent) {
-        // e.stopPropagation();
-        // this.parent?.getEmitter().emit(TbrEvent.MOUSE_CLICK, this, e);
-        // if (this.isExecutable()) {
-        //     this.execCommand();
-        //     this.getAppMenuRoot()?.close();
-        // }
-    }
-
-    private onMouseEnter(e: MouseEvent) {
-        // e.stopPropagation();
-        // this.parent?.getEmitter().emit(TbrEvent.MOUSE_ENTER, this, e);
+        // e.stopPropagation()
+        this.execCommand()
+        this.parent.deleteContextMenu()
     }
 
     private onSubItemMouseEnter(target: MenuItem, e: MouseEvent): void {
@@ -89,40 +85,18 @@ export class MenuItem {
     }
 
     public async execCommand(): Promise<void> {
-        // if (this.command === undefined) {
-        //     return;
-        // }
-        //
-        // if (exceptionCommands.indexOf(this.command) > -1) {
-        //     switch (this.command) {
-        //         case "application:open-terms-of-use":
-        //             shell.openExternal("https://help.github.com/articles/github-terms-of-service/");
-        //             break;
-        //         case "application:open-documentation":
-        //             shell.openExternal("http://flight-manual.atom.io/");
-        //             break;
-        //         case "application:open-faq":
-        //             shell.openExternal("https://atom.io/faq");
-        //             break;
-        //         case "application:open-discussions":
-        //             shell.openExternal("https://discuss.atom.io/");
-        //             break;
-        //         case "application:report-issue":
-        //             shell.openExternal(
-        //                 "https://github.com/atom/atom/blob/master/CONTRIBUTING.md#submitting-issues"
-        //             );
-        //             break;
-        //         case "application:search-issues":
-        //             shell.openExternal("https://github.com/atom/atom/issues");
-        //             break;
-        //     }
-        //     return;
-        // }
-        //
-        // let target =
-        //     (atom.workspace.getActiveTextEditor() as any)?.getElement() ||
-        //     (atom.workspace.getActivePane() as any).getElement();
-        //
-        // await (atom.commands as any).dispatch(target, this.command, this.commandDetail);
+        if (this.command === undefined) {
+            return
+        }
+
+        let target =
+            (atom.workspace.getActiveTextEditor() as any)?.getElement() ||
+            (atom.workspace.getActivePane() as any).getElement()
+
+        await (atom.commands as any).dispatch(
+            target,
+            this.command,
+            this.commandDetail,
+        )
     }
 }
