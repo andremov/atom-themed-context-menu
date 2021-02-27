@@ -141,18 +141,23 @@
         "signature": "506b80b9951c9381dc5f11897b31fca5e2a65731d96ddefa19687fbc26b23c6e",
         "affectsGlobalScope": true
       },
-      "./src/menuitem.ts": {
-        "version": "d2d7fe70982cd05d6ef3f974f2b72e88dc26708115b8655798dfdb50f35507d8",
-        "signature": "687960b07b10cc8034d871d0c81232586f7b99e4b819f3ee77f8e5b371d8af08",
+      "./src/types.ts": {
+        "version": "fc9f9d0390c5da3c3ac1061f4ae900faf9c8aefd8517d19f7dc3cef55ad921ab",
+        "signature": "d31181f73f6346f66fb6e8ff3651da607cd5f141fb664b03339463f5f2f8d7d8",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "eb789dca8505a93c2767dc88cdf6030b987a459b605aeae7130c313bf925faf5",
-        "signature": "59e382f1cbfe00de0d3c998bf5b17f103cb55ed5d1bcb756561574e37d242188",
+        "version": "8fc1b914a57dba604be7e8855702997f6ff2759cacc459e1a2f349ee12643fb0",
+        "signature": "914e114565b48de352ee59bc8cb77dc97cb9d8c40c02f5813b1b5cdaa7ac6645",
+        "affectsGlobalScope": false
+      },
+      "./src/menuitem.ts": {
+        "version": "941e758b7bb28afd9555b58f18b5404fdd9a3d2a1bdd4d96ef70a3da43f5bf6d",
+        "signature": "0bb716757bd49c166aa834a106f6a081afbc741d86368aa4aa2708268572ce1c",
         "affectsGlobalScope": false
       },
       "./src/main.ts": {
-        "version": "bf1a3be42d77a2672ff875fa517ccdb1e78927afb3b5f0137c03c9310cf49243",
+        "version": "fb76c3e7f156094e822ba80dcaff386bbeed1dbbe67ede5267ab235a9ddd30c7",
         "signature": "2843d6bbc50803b3a8e656341e5d520a0d86e2206f9676d2eb352568924a9d96",
         "affectsGlobalScope": false
       },
@@ -676,7 +681,9 @@
         "./src/themedcontextmenu.ts"
       ],
       "./src/menuitem.ts": [
-        "./node_modules/@types/node/events.d.ts"
+        "./node_modules/@types/node/events.d.ts",
+        "./src/themedcontextmenu.ts",
+        "./src/types.ts"
       ],
       "./src/themedcontextmenu.ts": [
         "./src/menuitem.ts"
@@ -918,6 +925,10 @@
       "./node_modules/@types/node/zlib.d.ts": [
         "./node_modules/@types/node/stream.d.ts",
         "./node_modules/@types/node/zlib.d.ts"
+      ],
+      "./src/menuitem.ts": [
+        "./src/themedcontextmenu.ts",
+        "./src/types.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -998,104 +1009,9 @@
       "./node_modules/typescript/lib/lib.es5.d.ts",
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./src/main.ts",
-      [
-        "./src/menuitem.ts",
-        [
-          {
-            "file": "./src/menuitem.ts",
-            "start": 765,
-            "length": 7,
-            "messageText": "Cannot redeclare block-scoped variable 'element'.",
-            "category": 1,
-            "code": 2451
-          },
-          {
-            "file": "./src/menuitem.ts",
-            "start": 988,
-            "length": 7,
-            "messageText": "Cannot redeclare block-scoped variable 'element'.",
-            "category": 1,
-            "code": 2451
-          },
-          {
-            "file": "./src/menuitem.ts",
-            "start": 340,
-            "length": 8,
-            "messageText": "Cannot find name 'TbrEvent'.",
-            "category": 1,
-            "code": 2304
-          },
-          {
-            "file": "./src/menuitem.ts",
-            "start": 717,
-            "length": 5,
-            "messageText": "Generic type 'Array<T>' requires 1 type argument(s).",
-            "category": 1,
-            "code": 2314
-          },
-          {
-            "file": "./src/menuitem.ts",
-            "start": 1036,
-            "length": 7,
-            "messageText": "Variable 'element' is used before being assigned.",
-            "category": 1,
-            "code": 2454
-          },
-          {
-            "file": "./src/menuitem.ts",
-            "start": 1099,
-            "length": 7,
-            "messageText": "Variable 'element' is used before being assigned.",
-            "category": 1,
-            "code": 2454
-          },
-          {
-            "file": "./src/menuitem.ts",
-            "start": 1386,
-            "length": 7,
-            "messageText": "Variable 'element' is used before being assigned.",
-            "category": 1,
-            "code": 2454
-          },
-          {
-            "file": "./src/menuitem.ts",
-            "start": 1428,
-            "length": 7,
-            "messageText": "Variable 'element' is used before being assigned.",
-            "category": 1,
-            "code": 2454
-          },
-          {
-            "file": "./src/menuitem.ts",
-            "start": 1561,
-            "length": 13,
-            "code": 2339,
-            "category": 1,
-            "messageText": "Property 'commandDetail' does not exist on type 'MenuItem'."
-          }
-        ]
-      ],
-      [
-        "./src/themedcontextmenu.ts",
-        [
-          {
-            "file": "./src/themedcontextmenu.ts",
-            "start": 189,
-            "length": 8,
-            "code": 2339,
-            "category": 1,
-            "messageText": "Property 'itemSets' does not exist on type 'ContextMenuManager'."
-          },
-          {
-            "file": "./src/themedcontextmenu.ts",
-            "start": 1199,
-            "length": 40,
-            "messageText": "Object is possibly 'null'.",
-            "category": 1,
-            "code": 2531
-          }
-        ]
-      ]
+      "./src/menuitem.ts",
+      "./src/themedcontextmenu.ts",
+      "./src/types.ts"
     ],
     "affectedFilesPendingEmit": [
       [
@@ -1316,6 +1232,10 @@
       ],
       [
         "./src/themedcontextmenu.ts",
+        1
+      ],
+      [
+        "./src/types.ts",
         1
       ]
     ]

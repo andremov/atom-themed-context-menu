@@ -1,45 +1,52 @@
 import { MenuItem } from "./MenuItem"
 
 export class ThemedContextMenu {
-    constructor() {}
+    private screenWrapper: HTMLDivElement
+    private activeContextMenu: HTMLDivElement | undefined
 
-    activate() {
-        console.log("hello!")
-        let contextMenuItems = atom.contextMenu.itemSets.filter(
-            (item) => item.items.length > 1,
+    constructor() {
+        this.screenWrapper = document.createElement("div")
+        this.screenWrapper.classList.add("themed-context-menu-container")
+        this.screenWrapper.classList.add("not-active")
+
+        this.screenWrapper.addEventListener("click", (e) =>
+            this.onMouseClick(e as MouseEvent),
         )
-        let triggeringItem = contextMenuItems[0]
 
-        let domElems = document.querySelectorAll(triggeringItem.selector)
-        domElems.forEach((item) =>
-            this.hijackContextMenu(item, triggeringItem.items),
-        )
-    }
-
-    deactivate() {}
-
-    hijackContextMenu(domElement, items) {
-        domElement.addEventListener("contextmenu", (e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            console.log(items)
-
-            this.createContextMenu(e, items)
-        })
+        document
+            .querySelector("atom-workspace")
+            ?.appendChild(this.screenWrapper)
     }
 
     createContextMenu(e, items) {
-        const context = document.createElement("div")
-        context.classList.add("themed-context-menu")
+        this.deleteContextMenu()
+        this.screenWrapper.classList.remove("not-active")
+
+        this.activeContextMenu = document.createElement("div")
+        this.activeContextMenu.classList.add("themed-context-menu")
 
         for (let i = 0; i < items.length; i++) {
-            context.appendChild(MenuItem.createMenuItem(items[i]).getElement())
+            this.activeContextMenu.appendChild(
+                MenuItem.createMenuItem(items[i], this).getElement(),
+            )
         }
 
-        context.setAttribute(
+        this.activeContextMenu.setAttribute(
             "style",
-            "top:" + e.clientY + "px; left:" + e.clientX + "px",
+            "top:" + e.clientY + "px; left:" + (e.clientX + 10) + "px",
         )
-        document.querySelector("atom-workspace").appendChild(context)
+        this.screenWrapper.appendChild(this.activeContextMenu)
+    }
+
+    onMouseClick(e) {
+        e.stopPropagation()
+        this.deleteContextMenu()
+    }
+
+    deleteContextMenu() {
+        if (this.activeContextMenu) {
+            this.activeContextMenu.remove()
+            this.screenWrapper.classList.add("not-active")
+        }
     }
 }
