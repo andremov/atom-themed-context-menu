@@ -2,8 +2,8 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Toggle atom-themed-context-menu",
-        "command": "atom-themed-context-menu:toggle"
+        "label": "Toggle themed-context-menu",
+        "command": "themed-context-menu:toggle"
       }
     ]
   },
@@ -12,11 +12,11 @@
       "label": "Packages",
       "submenu": [
         {
-          "label": "atom-themed-context-menu",
+          "label": "themed-context-menu",
           "submenu": [
             {
               "label": "Toggle",
-              "command": "atom-themed-context-menu:toggle"
+              "command": "themed-context-menu:toggle"
             }
           ]
         }

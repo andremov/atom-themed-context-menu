@@ -1,4 +1,4 @@
-# atom-themed-context-menu package
+# themed-context-menu package
 
 A short description of your package.
 

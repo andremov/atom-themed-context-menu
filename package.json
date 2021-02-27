@@ -1,15 +1,18 @@
 {
-  "name": "atom-themed-context-menu",
-  "main": "./lib/main",
+  "name": "themed-context-menu",
+  "main": "./lib/themed-context-menu",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "keywords": [],
+  "keywords": [
+  ],
   "activationCommands": {
-    "atom-workspace": "atom-themed-context-menu:toggle"
+    "atom-workspace": "themed-context-menu:toggle"
   },
-  "repository": "https://github.com/atom/atom-themed-context-menu",
+  "repository": "https://github.com/atom/themed-context-menu",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
   }
 }
