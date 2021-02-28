@@ -2,6 +2,7 @@ import EventEmitter from "events"
 import { ContextMenuItem } from "./types"
 import { ThemedContextMenu } from "./ThemedContextMenu"
 
+// handler for the items shown in the context menu, be it a separator or a command
 export class MenuItem {
     private element: HTMLHRElement | HTMLDivElement
     private command?: string
@@ -24,6 +25,7 @@ export class MenuItem {
         )
     }
 
+    // static function wrapper to create a MenuItem object from a ContextMenuItem object
     public static createMenuItem(
         item: ContextMenuItem,
         parent: ThemedContextMenu,
@@ -70,13 +72,14 @@ export class MenuItem {
         return this.height
     }
 
+    // on click, execute command and hide the context menu
     private onMouseClick(e: MouseEvent) {
         e.stopPropagation()
         this.execCommand()
         this.parent.deleteContextMenu()
     }
 
-    public async execCommand(): Promise<void> {
+    private async execCommand(): Promise<void> {
         if (this.command === undefined) {
             return
         }
