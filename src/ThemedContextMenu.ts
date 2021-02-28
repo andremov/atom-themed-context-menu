@@ -28,10 +28,6 @@ export class ThemedContextMenu {
         console.log(this.children.length)
         this.lastClick = e
         this.activeContextMenu.classList.remove("invisible")
-        // this.deleteContextMenu()
-
-        // this.activeContextMenu = document.createElement("div")
-        // this.activeContextMenu.classList.add("themed-context-menu")
 
         items.forEach((element) => {
             this.addChild(element)
@@ -44,7 +40,6 @@ export class ThemedContextMenu {
         const mitem = MenuItem.createMenuItem(item, this)
         this.children.push(mitem)
         this.activeContextMenu?.appendChild(mitem.getElement())
-        // this.height += mitem.getHeight()
     }
 
     private onMouseClick(e) {
@@ -70,15 +65,12 @@ export class ThemedContextMenu {
     }
 
     deleteContextMenu() {
-        // if (this.activeContextMenu) {
-        //     this.activeContextMenu.remove()
         this.height = 0
         this.visible = false
         this.children = []
         this.activeContextMenu.classList.add(".invisible")
         this.lastClick = undefined
         this.removeAllChildNodes()
-        // }
     }
 
     removeAllChildNodes() {
