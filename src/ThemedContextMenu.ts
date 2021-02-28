@@ -79,7 +79,7 @@ export class ThemedContextMenu {
     deleteContextMenu() {
         this.visible = false
         this.children = []
-        this.activeContextMenu.classList.add(".invisible")
+        this.activeContextMenu.classList.add("invisible")
         this.lastClick = undefined
         this.removeAllChildNodes()
     }
