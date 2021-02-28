@@ -1,33 +1,49 @@
 import { ContextMenuItem } from "./types"
+import { ThemedContextMenu } from "./ThemedContextMenu"
 
 export class ContextElement {
-    elem: HTMLElement
-    items: ContextMenuItem[] = []
+    private elem: HTMLElement
+    private items: ContextMenuItem[] = []
 
     constructor(elem, items) {
         this.elem = elem
         this.addItems(items)
     }
 
-	hijackContextMenu(tcm : ThemedContextMenu) {}
-	    this.elem.addEventListener("contextmenu", (e) => {
-	        e.preventDefault()
-	        e.stopPropagation()
+    // add listener to html element to 'hijack' the context menu event
+    hijackContextMenu(tcm: ThemedContextMenu) {
+        this.elem.addEventListener("contextmenu", (e) =>
+            this.onContextMenu(e, tcm),
+        )
+    }
 
-	        tcm.displayContextMenu(e, this.items)
-	    })
-	}
+    // wrapper function for context menu event so listener can be removed on deactivate
+    private onContextMenu(e: MouseClick, tcm: ThemedContextMenu) {
+        // prevent native context menu
+        e.preventDefault()
+        e.stopPropagation()
 
-    addItems(items) {
-        items.forEach((element) => this.addItem(element))
+        //call to request themed context menu
+        tcm.displayContextMenu(e, this.ihtems)
+    }
+
+    addItems(contelem: ContextElement) {
+        contelem.getItems().forEach((element) => this.addItem(element))
     }
 
     private addItem(newItem) {
         if (newItem.type) {
+            // prevent starting with a separator
+            if (this.items.length === 0) {
+                return
+            }
+
+            // prevent two separators in a row
             if (!this.items[this.items.length - 1].type) {
                 this.items.push(newItem)
             }
         } else {
+            // prevent duplicates
             let similarComms = this.items.filter(
                 (item) => item.command === newItem.command,
             )
@@ -35,5 +51,13 @@ export class ContextElement {
                 this.items.push(newItem)
             }
         }
+    }
+
+    getElem() {
+        return this.elem
+    }
+
+    getItems() {
+        return this.items
     }
 }
