@@ -57,7 +57,7 @@ export class ThemedContextMenu {
 
     // generates a style string that positions the context menu next to
     // mouse event, while also preventing it from overflowing
-    private getPositionStyleString(e: MouseClick) {
+    private getPositionStyleString(e: MouseClick): string {
         let x = e.clientX + 10 + 5
         let y = e.clientY + 5
 

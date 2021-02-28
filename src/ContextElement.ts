@@ -34,9 +34,14 @@ export class ContextElement {
         tcm.displayContextMenu(e, this.items)
     }
 
+    // wrapper function to add items into current element items
+    addItems(items: ContextMenuItem[]) {
+        items.forEach((element) => this.addItem(element))
+    }
+
     // wrapper function to add context element items into current element items
-    addItems(contelem: ContextElement) {
-        contelem.getItems().forEach((element) => this.addItem(element))
+    mergeContextElement(contelem: ContextElement) {
+        this.addItems(contelem.getItems())
     }
 
     private addItem(newItem) {
@@ -61,11 +66,11 @@ export class ContextElement {
         }
     }
 
-    getElem() {
+    getElem(): HTMLElement {
         return this.elem
     }
 
-    getItems() {
+    getItems(): ContextMenuItem[] {
         return this.items
     }
 }

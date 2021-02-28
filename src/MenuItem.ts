@@ -29,7 +29,7 @@ export class MenuItem {
     public static createMenuItem(
         item: ContextMenuItem,
         parent: ThemedContextMenu,
-    ) {
+    ): MenuItem {
         // early return for separators
         if (item.type === "separator") {
             return new MenuItem(document.createElement("hr"), parent, 7)
@@ -100,11 +100,11 @@ export class MenuItem {
         )
     }
 
-    public getElement() {
+    public getElement(): HTMLElement {
         return this.element
     }
 
-    public getHeight() {
+    public getHeight(): number {
         return this.height
     }
 }

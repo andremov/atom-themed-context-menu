@@ -48,11 +48,11 @@ function unhijackAllContextMenus() {
 }
 
 // join different context menu item sets for same dom elements
-function pruneElements(elements: ContextElement[]) {
+function pruneElements(elements: ContextElement[]): ContextElement[] {
     for (let i = 0; i < elements.length; i++) {
         for (let j = i + 1; j < elements.length; j++) {
             if (elements[i].getElem() === elements[j].getElem()) {
-                elements[i].addItems(elements[j])
+                elements[i].mergeContextElement(elements[j])
                 elements.splice(j, 1)
             }
         }
