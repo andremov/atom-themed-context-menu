@@ -142,13 +142,18 @@
         "affectsGlobalScope": true
       },
       "./src/types.ts": {
-        "version": "3a88f33138c6bdff8d858176009d3f60a3b198f2cdf6363654844e5d17e6858d",
-        "signature": "ddba81d7427d91ec8a423c11741817e6e7684dc870490cd34a84aaff862f82c8",
+        "version": "28691abe59cacb2ee99ed6a5b6ef6ad2de7574bbc6bd02f2161bc1dfca527099",
+        "signature": "21566a3d5d05b665898a49547e23586d56d8fce07de330a18ba3ccccd8147dbf",
+        "affectsGlobalScope": false
+      },
+      "./src/contextelement.ts": {
+        "version": "cd7d8667eb6096a0d9bd57f2a59a76757f815f5299f54b7bdb37796878f0d7f5",
+        "signature": "b287935282447cde28ec9459af7ee5196e101f8f53a0361a207fd8ca780aa638",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "21abde3cc4e0e4eeaef6c1735e3267f4652183329771f9ae766dd61479bbeea4",
-        "signature": "31631569bda9b023a8d9335c2227b4bdd0500db77f5e875bbd09058a6cdc18f1",
+        "version": "11342b7798bc9eca866dad1141e60a3a1e4fac39839f035857f257020261b761",
+        "signature": "b0d0f8104327c7e2f699e34a46fd13eca266dd7d9b5d3499e6b37d92daf6ccac",
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
@@ -157,7 +162,7 @@
         "affectsGlobalScope": false
       },
       "./src/main.ts": {
-        "version": "066ab1b2a7b43b59b0669a1a2d6209a7af1a24fc4a08615eb569f9d9b5a20080",
+        "version": "cc58cfa593aadbb98149204f58a2c26f6569eabf78e0c3f25c557f9decc848f7",
         "signature": "2843d6bbc50803b3a8e656341e5d520a0d86e2206f9676d2eb352568924a9d96",
         "affectsGlobalScope": false
       },
@@ -677,9 +682,12 @@
         "./node_modules/@types/node/stream.d.ts",
         "./node_modules/@types/node/zlib.d.ts"
       ],
-      "./src/main.ts": [
-        "./src/themedcontextmenu.ts",
+      "./src/contextelement.ts": [
         "./src/types.ts"
+      ],
+      "./src/main.ts": [
+        "./src/contextelement.ts",
+        "./src/themedcontextmenu.ts"
       ],
       "./src/menuitem.ts": [
         "./node_modules/@types/node/events.d.ts",
@@ -687,7 +695,8 @@
         "./src/types.ts"
       ],
       "./src/themedcontextmenu.ts": [
-        "./src/menuitem.ts"
+        "./src/menuitem.ts",
+        "./src/types.ts"
       ]
     },
     "exportedModulesMap": {
@@ -927,8 +936,14 @@
         "./node_modules/@types/node/stream.d.ts",
         "./node_modules/@types/node/zlib.d.ts"
       ],
+      "./src/contextelement.ts": [
+        "./src/types.ts"
+      ],
       "./src/menuitem.ts": [
         "./src/themedcontextmenu.ts",
+        "./src/types.ts"
+      ],
+      "./src/themedcontextmenu.ts": [
         "./src/types.ts"
       ]
     },
@@ -1009,6 +1024,7 @@
       "./node_modules/typescript/lib/lib.es2020.bigint.d.ts",
       "./node_modules/typescript/lib/lib.es5.d.ts",
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "./src/contextelement.ts",
       "./src/main.ts",
       "./src/menuitem.ts",
       "./src/themedcontextmenu.ts",
@@ -1221,6 +1237,10 @@
       ],
       [
         "./node_modules/typescript/lib/lib.es2018.d.ts",
+        1
+      ],
+      [
+        "./src/contextelement.ts",
         1
       ],
       [
