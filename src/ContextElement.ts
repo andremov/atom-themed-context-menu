@@ -17,6 +17,13 @@ export class ContextElement {
         )
     }
 
+    // release listener to html element
+    unhijackContextMenu(tcm: ThemedContextMenu) {
+        this.elem.removeEventListener("contextmenu", (e) =>
+            this.onContextMenu(e, tcm),
+        )
+    }
+
     // wrapper function for context menu event so listener can be removed on deactivate
     private onContextMenu(e: MouseClick, tcm: ThemedContextMenu) {
         // prevent native context menu
@@ -27,6 +34,7 @@ export class ContextElement {
         tcm.displayContextMenu(e, this.ihtems)
     }
 
+    // wrapper function to add context element items into current element items
     addItems(contelem: ContextElement) {
         contelem.getItems().forEach((element) => this.addItem(element))
     }
