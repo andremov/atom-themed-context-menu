@@ -3,21 +3,9 @@ export interface ContextMenuItem {
     command?: string
     commandDetail?: any
     type?: "separator"
-    // enabled?: boolean;
-    // visible?: boolean;
-    // submenu: IMenuItem[];
 }
 
-export class ElementI {
-    elem: HTMLElement
-    items: ContextMenuItem[]
-
-    constructor(elem, items) {
-        this.elem = elem
-        this.items = items
-    }
-
-    addItems(items) {
-        items.forEach((element) => this.items.push(element))
-    }
+export interface MouseClick {
+    clientX: number
+    clientY: number
 }
