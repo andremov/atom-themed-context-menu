@@ -3,18 +3,18 @@ import { MouseClick } from "./types"
 
 export class ThemedContextMenu {
     private activeContextMenu: HTMLDivElement
-    private height: number
     private visible: boolean = false
     private children: MenuItem[] = []
     private lastClick: MouseClick | undefined
 
     constructor() {
-        this.height = 0
+        // add click listener to clear the context menu
         let aws = document.querySelector("atom-workspace")
         aws?.addEventListener("click", (e) =>
             this.onMouseClick(e as MouseEvent),
         )
 
+        // create the context menu, but make it invisible
         this.activeContextMenu = document.createElement("div")
         this.activeContextMenu.classList.add("themed-context-menu")
         this.activeContextMenu.classList.add("invisible")
@@ -22,20 +22,29 @@ export class ThemedContextMenu {
     }
 
     displayContextMenu(e: MouseClick, items) {
+        // if mouse event is different to last, clear context menu
         if (this.lastClick !== undefined && this.lastClick !== e) {
             this.deleteContextMenu()
         }
-        console.log(this.children.length)
+
+        // set last click event to current parameter,
+        // make context menu visible
         this.lastClick = e
         this.activeContextMenu.classList.remove("invisible")
 
+        // add context menu items to context menu
         items.forEach((element) => {
             this.addChild(element)
         })
 
-        this.activeContextMenu.setAttribute("style", this.getPosition(e))
+        // move context menu position to mouse event position
+        this.activeContextMenu.setAttribute(
+            "style",
+            this.getPositionStyleString(e),
+        )
     }
 
+    // adds a context menu item to context menu
     private addChild(item) {
         const mitem = MenuItem.createMenuItem(item, this)
         this.children.push(mitem)
@@ -46,7 +55,9 @@ export class ThemedContextMenu {
         this.deleteContextMenu()
     }
 
-    private getPosition(e: MouseClick) {
+    // generates a style string that positions the context menu next to
+    // mouse event, while also preventing it from overflowing
+    private getPositionStyleString(e: MouseClick) {
         let x = e.clientX + 10 + 5
         let y = e.clientY + 5
 
@@ -56,6 +67,7 @@ export class ThemedContextMenu {
         return "top:" + y + "px; left:" + x + "px"
     }
 
+    // calculate context menu height for positioning function
     private getHeight(): number {
         return this.children
             .map((item) => item.getHeight())
@@ -65,7 +77,6 @@ export class ThemedContextMenu {
     }
 
     deleteContextMenu() {
-        this.height = 0
         this.visible = false
         this.children = []
         this.activeContextMenu.classList.add(".invisible")
@@ -73,7 +84,7 @@ export class ThemedContextMenu {
         this.removeAllChildNodes()
     }
 
-    removeAllChildNodes() {
+    private removeAllChildNodes() {
         while (this.activeContextMenu.firstChild) {
             this.activeContextMenu.removeChild(
                 this.activeContextMenu.firstChild,

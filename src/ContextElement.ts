@@ -1,4 +1,4 @@
-import { ContextMenuItem } from "./types"
+import { ContextMenuItem, MouseClick } from "./types"
 import { ThemedContextMenu } from "./ThemedContextMenu"
 
 export class ContextElement {
@@ -25,13 +25,13 @@ export class ContextElement {
     }
 
     // wrapper function for context menu event so listener can be removed on deactivate
-    private onContextMenu(e: MouseClick, tcm: ThemedContextMenu) {
+    private onContextMenu(e, tcm: ThemedContextMenu) {
         // prevent native context menu
         e.preventDefault()
         e.stopPropagation()
 
         //call to request themed context menu
-        tcm.displayContextMenu(e, this.ihtems)
+        tcm.displayContextMenu(e, this.items)
     }
 
     // wrapper function to add context element items into current element items
