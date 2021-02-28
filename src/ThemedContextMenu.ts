@@ -29,6 +29,7 @@ export class ThemedContextMenu {
 
         // set last click event to current parameter,
         // make context menu visible
+        this.visible = true
         this.lastClick = e
         this.activeContextMenu.classList.remove("invisible")
 
@@ -77,11 +78,13 @@ export class ThemedContextMenu {
     }
 
     deleteContextMenu() {
-        this.visible = false
-        this.children = []
-        this.activeContextMenu.classList.add("invisible")
-        this.lastClick = undefined
-        this.removeAllChildNodes()
+        if (this.visible) {
+            this.visible = false
+            this.children = []
+            this.activeContextMenu.classList.add("invisible")
+            this.lastClick = undefined
+            this.removeAllChildNodes()
+        }
     }
 
     private removeAllChildNodes() {

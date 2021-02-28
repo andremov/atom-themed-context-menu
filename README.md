@@ -4,13 +4,6 @@ A short description of your package.
 
 To Do:
 
--   [x] Menu at mouse click position
--   [x] Clamp menu position to prevent overflow
--   [x] Dispose menu on blur
--   [x] add missing actions to context menu
--   [x] recognize dividers
--   [x] on hover styling
--   [x] working commands
 -   [ ] submenus??
 -   [ ] hide context menu on window lose focus
 
