@@ -6,6 +6,7 @@ export class ThemedContextMenu {
     private visible: boolean = false
     private children: MenuItem[] = []
     private lastClick: MouseClick | undefined
+    private windowBlurObserver: MutationObserver
 
     constructor() {
         // add click listener to clear the context menu
@@ -13,6 +14,16 @@ export class ThemedContextMenu {
         aws?.addEventListener("click", (e) =>
             this.onMouseClick(e as MouseEvent),
         )
+
+        this.windowBlurObserver = new MutationObserver((e) =>
+            this.windowBlurCallback(e, this),
+        )
+        const body = document.querySelector("body")
+        if (body) {
+            this.windowBlurObserver.observe(body, {
+                attributeFilter: ["class"],
+            })
+        }
 
         // create the context menu, but make it invisible
         this.activeContextMenu = document.createElement("div")
@@ -43,6 +54,12 @@ export class ThemedContextMenu {
             "style",
             this.getPositionStyleString(e),
         )
+    }
+
+    private windowBlurCallback(mutation, tcm: ThemedContextMenu) {
+        // need to pass in the tcm through params because 'this' is the
+        // MutationObserver in this function
+        tcm.deleteContextMenu()
     }
 
     // adds a context menu item to context menu

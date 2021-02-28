@@ -152,8 +152,8 @@
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "41946bcc7e8524019b7f3de1eded82ae94572c5bec3cbbfd84b6994beb506271",
-        "signature": "a6ff5a7d1dc5b183edffe466a4e25f1d01bf3d6aefd9451687be7b2d6abf7cd9",
+        "version": "b7048630537e747a0dea428e506bc33c8f6e9564306246249e64b819674cdb26",
+        "signature": "0e4be25fd0649cb0728ed8edd1224ee521fb24c550408d9758619b34d1c50ca4",
         "affectsGlobalScope": false
       },
       "./src/contextelement.ts": {
