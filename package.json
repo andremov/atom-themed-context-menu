@@ -1,7 +1,7 @@
 {
     "name": "themed-context-menu",
     "main": "./dist/themed-context-menu",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "private": false,
     "description": "Replaces Atom's native context menu with a theme-aware context menu that is more inline with Atom's UI design.",
     "scripts": {
@@ -22,6 +22,10 @@
     "keywords": [
         "context menu replacer",
         "context menu",
+        "theme context menu",
+        "themed context menu",
+        "theme",
+        "themed",
         "menu",
         "ui",
         "custom",
