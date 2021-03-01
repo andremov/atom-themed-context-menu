@@ -1,8 +1,8 @@
 # Themed Context Menu
 
-[![apm](https://flat.badgen.net/apm/license/themed-title-bar)](https://atom.io/packages/themed-title-bar)
-[![apm](https://flat.badgen.net/apm/v/themed-title-bar)](https://atom.io/packages/title-bar-replacer)
-[![apm](https://flat.badgen.net/apm/dl/themed-title-bar)](https://atom.io/packages/themed-title-bar)
+[![apm](https://flat.badgen.net/apm/license/themed-context-menu)](https://atom.io/packages/themed-context-menu)
+[![apm](https://flat.badgen.net/apm/v/themed-context-menu)](https://atom.io/packages/title-bar-replacer)
+[![apm](https://flat.badgen.net/apm/dl/themed-context-menu)](https://atom.io/packages/themed-context-menu)
 
 Replaces Atom's native context menu with a theme-aware context menu that is more inline with Atom's UI design.
 
@@ -10,8 +10,8 @@ Replaces Atom's native context menu with a theme-aware context menu that is more
 
 ## Installation
 
-Install through Atom's [install view](atom://settings-view/show-package?package=themed-title-bar) or use apm:
+Install through Atom's [install view](atom://settings-view/show-package?package=themed-context-menu) or use apm:
 
 ```sh
-$ apm install themed-title-bar
+$ apm install themed-context-menu
 ```
