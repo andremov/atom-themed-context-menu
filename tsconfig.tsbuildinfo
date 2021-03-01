@@ -142,27 +142,22 @@
         "affectsGlobalScope": true
       },
       "./src/types.ts": {
-        "version": "ef73a5f2a37839cdc98d1c9eb4418fedc0595e2037bb90b8234e1e7b2a28dcf5",
-        "signature": "21566a3d5d05b665898a49547e23586d56d8fce07de330a18ba3ccccd8147dbf",
-        "affectsGlobalScope": false
-      },
-      "./src/menuitem.ts": {
-        "version": "f8286eaeb6499f6ce2b28befe5c8b0fb27fa3b352e2a79951f11ec99818f9c15",
-        "signature": "6f080a5014a2ec07dfe326b65876e0fd80f384622b2ad5589d0edaa0b0e36ffa",
+        "version": "dfc9ea0694355c4f823447490cf59979f8fc21b65486ac41e593a8b5a339884f",
+        "signature": "ec2d99ec02fdeb2caa804f7a0fefc93f9c8582a35dc1ac1b3dfcb07909c3a4f0",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "09d7cdc75f95668fa8f224ba7efa180d406d7c8bc9bbb88e70dfd4a3e24b3541",
-        "signature": "98289be4a8a6e473cddbf4e06f66d03e8d5eaa101c5dc4e2d3d1377e9fb8910c",
+        "version": "78eacf1108231478ded5f5941136b685d7cacb2f071fd697a4c0529729549f8d",
+        "signature": "812b41d5caf99b5c0f79a349d169b31e41fe685c80d48b76e542db19386e7503",
         "affectsGlobalScope": false
       },
-      "./src/contextelement.ts": {
-        "version": "658a643981370a768e1cb0e72a740989e36179c30ce7935196fc198632b0bb75",
-        "signature": "940ffe790c5ec91463bbec749a0ae02bab1d59f9e947cfd3a3f18808997c7a27",
+      "./src/menuitem.ts": {
+        "version": "4b3b0e51aef851b435bcd1d3e1577534ce32fa86533223547f4ec33966135966",
+        "signature": "88a5e9cbb16f3fd1a4b1d4ba9769d29a5b262f33bcf45063cd55f0efa53ea8df",
         "affectsGlobalScope": false
       },
       "./src/main.ts": {
-        "version": "6cedd3b128747b497401dd4741e4b1769e65ccaef449ecb7a8de42061a0f7895",
+        "version": "95cbfc3329425c6aa022c37b79b731529a38ce4031874957eea6926428b262a7",
         "signature": "19d85ac6ed5dc92a5d4fdc829fea5756014848ca1e285c7e7445324672ba6acb",
         "affectsGlobalScope": false
       },
@@ -682,12 +677,7 @@
         "./node_modules/@types/node/stream.d.ts",
         "./node_modules/@types/node/zlib.d.ts"
       ],
-      "./src/contextelement.ts": [
-        "./src/themedcontextmenu.ts",
-        "./src/types.ts"
-      ],
       "./src/main.ts": [
-        "./src/contextelement.ts",
         "./src/themedcontextmenu.ts"
       ],
       "./src/menuitem.ts": [
@@ -937,10 +927,6 @@
         "./node_modules/@types/node/stream.d.ts",
         "./node_modules/@types/node/zlib.d.ts"
       ],
-      "./src/contextelement.ts": [
-        "./src/themedcontextmenu.ts",
-        "./src/types.ts"
-      ],
       "./src/menuitem.ts": [
         "./src/themedcontextmenu.ts",
         "./src/types.ts"
@@ -1026,10 +1012,21 @@
       "./node_modules/typescript/lib/lib.es2020.bigint.d.ts",
       "./node_modules/typescript/lib/lib.es5.d.ts",
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
-      "./src/contextelement.ts",
       "./src/main.ts",
       "./src/menuitem.ts",
-      "./src/themedcontextmenu.ts",
+      [
+        "./src/themedcontextmenu.ts",
+        [
+          {
+            "file": "./src/themedcontextmenu.ts",
+            "start": 1608,
+            "length": 14,
+            "code": 2339,
+            "category": 1,
+            "messageText": "Property 'displayContext' does not exist on type 'ThemedContextMenu'."
+          }
+        ]
+      ],
       "./src/types.ts"
     ],
     "affectedFilesPendingEmit": [

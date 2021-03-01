@@ -1,26 +1,18 @@
 {
-  "context-menu": {
-    "atom-text-editor": [
-      {
-        "label": "Toggle Themed Context Menu",
-        "command": "themed-context-menu:toggle"
-      }
-    ]
-  },
-  "menu": [
-    {
-      "label": "Packages",
-      "submenu": [
+    "menu": [
         {
-          "label": "Themed Context Menu",
-          "submenu": [
-            {
-              "label": "Toggle",
-              "command": "themed-context-menu:toggle"
-            }
-          ]
+            "label": "Packages",
+            "submenu": [
+                {
+                    "label": "Themed Context Menu",
+                    "submenu": [
+                        {
+                            "label": "Toggle",
+                            "command": "themed-context-menu:toggle"
+                        }
+                    ]
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
