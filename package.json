@@ -1,17 +1,36 @@
 {
     "name": "themed-context-menu",
     "main": "./dist/themed-context-menu",
-    "version": "0.0.0",
-    "description": "A short description of your package",
-    "keywords": [],
+    "version": "1.0.0",
+    "private": false,
+    "description": "Replaces Atom's native context menu with a theme-aware context menu that is more inline with Atom's UI design.",
     "scripts": {
         "build": "node ./esbuild.config.mjs"
     },
-    "repository": "https://github.com/atom/themed-context-menu",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andremov/atom-themed-context-menu"
+    },
+    "homepage": "https://atom.io/packages/themed-context-menu",
+    "bugs": {
+        "url": "https://github.com/andremov/atom-themed-context-menu/issues"
+    },
     "license": "MIT",
     "engines": {
         "atom": ">=1.0.0 <2.0.0"
     },
+    "keywords": [
+        "context menu replacer",
+        "context menu",
+        "menu",
+        "ui",
+        "custom",
+        "replacer",
+        "right click",
+        "right click menu"
+    ],
+    "activationHooks": [],
+    "dependencies": {},
     "devDependencies": {
         "@types/atom": "^1.40.4",
         "@types/node": "^14.10.0",
