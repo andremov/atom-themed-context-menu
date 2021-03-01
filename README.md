@@ -6,7 +6,7 @@
 
 Replaces Atom's native context menu with a theme-aware context menu that is more inline with Atom's UI design.
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+![Showcase of the themed menu](https://imgur.com/nixZlbQ)
 
 ## Installation
 
