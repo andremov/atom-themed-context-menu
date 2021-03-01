@@ -1,5 +1,5 @@
 // used for the context menu items provided by atom
-export interface ContextMenuItem {
+export interface ContextMenuItemInterface {
     label?: string
     command?: string
     commandDetail?: any

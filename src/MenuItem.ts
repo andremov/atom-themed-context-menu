@@ -1,5 +1,5 @@
 import EventEmitter from "events"
-import { ContextMenuItem } from "./types"
+import { ContextMenuItemInterface } from "./types"
 import { ThemedContextMenu } from "./ThemedContextMenu"
 
 // handler for the items shown in the context menu, be it a separator or a command
@@ -25,9 +25,9 @@ export class MenuItem {
         )
     }
 
-    // static function wrapper to create a MenuItem object from a ContextMenuItem object
+    // static function wrapper to create a MenuItem object from a ContextMenuItemInterface object
     public static createMenuItem(
-        item: ContextMenuItem,
+        item: ContextMenuItemInterface,
         parent: ThemedContextMenu,
     ): MenuItem {
         // early return for separators
