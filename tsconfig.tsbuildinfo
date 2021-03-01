@@ -152,8 +152,8 @@
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "b7048630537e747a0dea428e506bc33c8f6e9564306246249e64b819674cdb26",
-        "signature": "0e4be25fd0649cb0728ed8edd1224ee521fb24c550408d9758619b34d1c50ca4",
+        "version": "09d7cdc75f95668fa8f224ba7efa180d406d7c8bc9bbb88e70dfd4a3e24b3541",
+        "signature": "98289be4a8a6e473cddbf4e06f66d03e8d5eaa101c5dc4e2d3d1377e9fb8910c",
         "affectsGlobalScope": false
       },
       "./src/contextelement.ts": {
@@ -162,8 +162,8 @@
         "affectsGlobalScope": false
       },
       "./src/main.ts": {
-        "version": "f0b97bced0bbf2a1c982dc27a52ff83e0753f7f8334c9304480c7ddb0cf370da",
-        "signature": "2843d6bbc50803b3a8e656341e5d520a0d86e2206f9676d2eb352568924a9d96",
+        "version": "6cedd3b128747b497401dd4741e4b1769e65ccaef449ecb7a8de42061a0f7895",
+        "signature": "19d85ac6ed5dc92a5d4fdc829fea5756014848ca1e285c7e7445324672ba6acb",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/node/globals.d.ts": {

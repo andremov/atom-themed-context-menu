@@ -2,6 +2,7 @@ import { MenuItem } from "./MenuItem"
 import { MouseClick } from "./types"
 
 export class ThemedContextMenu {
+    private hijackedFunction: Function | undefined
     private activeContextMenu: HTMLDivElement
     private visible: boolean = false
     private children: MenuItem[] = []
@@ -10,15 +11,15 @@ export class ThemedContextMenu {
 
     constructor() {
         // add click listener to clear the context menu
-        let aws = document.querySelector("atom-workspace")
-        aws?.addEventListener("click", (e) =>
+        document.addEventListener("click", (e) =>
             this.onMouseClick(e as MouseEvent),
         )
 
+        // add blur listener to clear the context menu
+        const body = document.querySelector("body")
         this.windowBlurObserver = new MutationObserver((e) =>
             this.windowBlurCallback(e, this),
         )
-        const body = document.querySelector("body")
         if (body) {
             this.windowBlurObserver.observe(body, {
                 attributeFilter: ["class"],
@@ -29,19 +30,36 @@ export class ThemedContextMenu {
         this.activeContextMenu = document.createElement("div")
         this.activeContextMenu.classList.add("themed-context-menu")
         this.activeContextMenu.classList.add("invisible")
+
+        let aws = document.querySelector("atom-workspace")
         aws?.appendChild(this.activeContextMenu)
+    }
+
+    // hijack context menu event function
+    hijackFunction() {
+        let contextMenuManager = atom.contextMenu as any
+        this.hijackedFunction = contextMenuManager.showForEvent
+        contextMenuManager.showForEvent = (e) => {
+            let data = contextMenuManager.templateForEvent(e)
+            this.displayContext(e, data)
+        }
+    }
+
+    releaseFunction() {
+        let contextMenuManager = atom.contextMenu as any
+        contextMenuManager.showForEvent = this.hijackedFunction
     }
 
     displayContextMenu(e: MouseClick, items) {
         // if mouse event is different to last, clear context menu
-        if (this.lastClick !== undefined && this.lastClick !== e) {
-            this.deleteContextMenu()
-        }
+        // if (this.lastClick !== undefined && this.lastClick !== e) {
+        this.deleteContextMenu()
+        // }
 
         // set last click event to current parameter,
         // make context menu visible
         this.visible = true
-        this.lastClick = e
+        // this.lastClick = e
         this.activeContextMenu.classList.remove("invisible")
 
         // add context menu items to context menu
@@ -59,7 +77,7 @@ export class ThemedContextMenu {
     private windowBlurCallback(mutation, tcm: ThemedContextMenu) {
         // need to pass in the tcm through params because 'this' is the
         // MutationObserver in this function
-        tcm.deleteContextMenu()
+        // tcm.deleteContextMenu()
     }
 
     // adds a context menu item to context menu
