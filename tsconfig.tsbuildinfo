@@ -147,8 +147,8 @@
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "78eacf1108231478ded5f5941136b685d7cacb2f071fd697a4c0529729549f8d",
-        "signature": "812b41d5caf99b5c0f79a349d169b31e41fe685c80d48b76e542db19386e7503",
+        "version": "9da477b282549db44e9e17bf82844c62670d22a57747118676a6354b807e7a9a",
+        "signature": "51aeb0dedf036e868afb32564e878181592f8126b5b7f80e9fbcbab498b787ad",
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
@@ -1019,7 +1019,7 @@
         [
           {
             "file": "./src/themedcontextmenu.ts",
-            "start": 1608,
+            "start": 1638,
             "length": 14,
             "code": 2339,
             "category": 1,

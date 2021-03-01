@@ -6,7 +6,6 @@ export class ThemedContextMenu {
     private activeContextMenu: HTMLDivElement
     private visible: boolean = false
     private children: MenuItem[] = []
-    private lastClick: MouseClick | undefined
     private windowBlurObserver: MutationObserver
 
     constructor() {
@@ -41,7 +40,7 @@ export class ThemedContextMenu {
         this.hijackedFunction = contextMenuManager.showForEvent
         contextMenuManager.showForEvent = (e) => {
             let data = contextMenuManager.templateForEvent(e)
-            this.displayContext(e, data)
+            this.displayContextMenu(e, data)
         }
     }
 
@@ -51,15 +50,10 @@ export class ThemedContextMenu {
     }
 
     displayContextMenu(e: MouseClick, items) {
-        // if mouse event is different to last, clear context menu
-        // if (this.lastClick !== undefined && this.lastClick !== e) {
         this.deleteContextMenu()
-        // }
 
-        // set last click event to current parameter,
         // make context menu visible
         this.visible = true
-        // this.lastClick = e
         this.activeContextMenu.classList.remove("invisible")
 
         // add context menu items to context menu
