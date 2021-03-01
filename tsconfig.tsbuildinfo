@@ -147,8 +147,8 @@
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "9da477b282549db44e9e17bf82844c62670d22a57747118676a6354b807e7a9a",
-        "signature": "51aeb0dedf036e868afb32564e878181592f8126b5b7f80e9fbcbab498b787ad",
+        "version": "c349d2c41c6f3c99f823447d604bc1e0e221c3a54ae5bdd177dab488a276138e",
+        "signature": "0cd9f0feacbfb788155f3b526c6b7c3539c12c8260f3d502ce46c068d5da926d",
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
@@ -1014,19 +1014,7 @@
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./src/main.ts",
       "./src/menuitem.ts",
-      [
-        "./src/themedcontextmenu.ts",
-        [
-          {
-            "file": "./src/themedcontextmenu.ts",
-            "start": 1638,
-            "length": 14,
-            "code": 2339,
-            "category": 1,
-            "messageText": "Property 'displayContext' does not exist on type 'ThemedContextMenu'."
-          }
-        ]
-      ],
+      "./src/themedcontextmenu.ts",
       "./src/types.ts"
     ],
     "affectedFilesPendingEmit": [
