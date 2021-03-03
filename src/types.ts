@@ -4,6 +4,7 @@ export interface ContextMenuItemInterface {
     command?: string;
     commandDetail?: any;
     type?: 'separator';
+    submenu?: ContextMenuItemInterface[];
 }
 
 // used for mouse events

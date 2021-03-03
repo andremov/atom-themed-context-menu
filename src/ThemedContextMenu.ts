@@ -42,7 +42,7 @@ export class ThemedContextMenu {
         new Menu(e, items, true, this);
     }
 
-    appendChild(child: HTMLElement) {
+    addMenu(child: HTMLElement) {
         this.container.appendChild(child);
     }
 

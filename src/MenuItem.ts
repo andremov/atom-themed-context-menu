@@ -9,6 +9,7 @@ export class MenuItem {
     private commandDetail?: string;
     private selected: boolean = false;
     private parent: Menu;
+    private submenu?: Menu;
 
     private constructor(element: HTMLHRElement | HTMLDivElement, parent: Menu) {
         this.element = element;
@@ -68,7 +69,21 @@ export class MenuItem {
             }
         }
 
+        if (item.submenu !== undefined) {
+            divElem.classList.add('has-submenu');
+            self.addMenu(item.submenu, parent);
+        }
+
         return self;
+    }
+
+    public addMenu(items: ContextMenuItemInterface[], parent: Menu) {
+        this.submenu = new Menu(
+            { clientX: 0, clientY: 0, isRelative: true },
+            items,
+            false,
+            parent,
+        );
     }
 
     // on click, execute command and hide the context menu

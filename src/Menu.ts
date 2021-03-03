@@ -6,15 +6,15 @@ export class Menu {
     private visible: boolean = true;
     private children: MenuItem[] = [];
     private domElement: HTMLElement;
-    private tcm: ThemedContextMenu;
+    private parent: ThemedContextMenu | Menu;
 
     constructor(
         e: MousePosition,
         items: ContextMenuItemInterface[],
         visible: boolean,
-        tcm: ThemedContextMenu,
+        parent: ThemedContextMenu | Menu,
     ) {
-        this.tcm = tcm;
+        this.parent = parent;
         this.domElement = document.createElement('div');
         this.domElement.classList.add('submenu');
 
@@ -25,16 +25,21 @@ export class Menu {
 
         // add context menu items to context menu
         items.forEach((element) => {
-            this.addChild(element);
+            this.addItem(element);
         });
+
         // move context menu position to mouse event position
         this.domElement.setAttribute('style', this.getPositionStyleString(e));
 
-        tcm.appendChild(this.domElement);
+        parent.addMenu(this.domElement);
+    }
+
     }
 
     public deleteContextMenu() {
-        this.tcm.deleteContextMenu();
+        this.parent.deleteContextMenu();
+    }
+
     }
 
     // generates a style string that positions the context menu next to
@@ -50,10 +55,14 @@ export class Menu {
     }
 
     // adds a context menu item to context menu
-    private addChild(item: ContextMenuItemInterface): void {
+    private addItem(item: ContextMenuItemInterface): void {
         const mitem = MenuItem.createMenuItem(item, this);
         this.children.push(mitem);
         this.domElement.appendChild(mitem.getElement());
+    }
+
+    public addMenu(child: HTMLElement) {
+        this.domElement.appendChild(child);
     }
 
     // calculate context menu height for positioning function
@@ -63,11 +72,5 @@ export class Menu {
             .reduce(function (a, b) {
                 return a + b;
             });
-    }
-
-    private removeAllChildNodes() {
-        while (this.domElement.firstChild) {
-            this.domElement.removeChild(this.domElement.firstChild);
-        }
     }
 }
