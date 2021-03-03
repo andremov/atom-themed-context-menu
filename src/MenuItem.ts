@@ -80,12 +80,19 @@ export class MenuItem {
     // on click, execute command and hide the context menu
     private onMouseClick(e: MouseEvent) {
         e.stopPropagation();
-        this.execCommand();
-        this.parent.deleteContextMenu();
+        if (this.hasCommand()) {
+            this.execCommand();
+            this.parent.deleteContextMenu();
+        }
+    }
+
+    public hasCommand(): boolean {
+        return this.command !== undefined;
+    }
     }
 
     private async execCommand(): Promise<void> {
-        if (this.command === undefined) {
+        if (!this.hasCommand()) {
             return;
         }
 
