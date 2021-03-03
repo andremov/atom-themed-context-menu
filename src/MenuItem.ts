@@ -11,14 +11,9 @@ export class MenuItem {
     private selected: boolean = false;
     private parent: Menu;
 
-    private constructor(
-        element: HTMLHRElement | HTMLDivElement,
-        parent: Menu,
-        height: number,
-    ) {
+    private constructor(element: HTMLHRElement | HTMLDivElement, parent: Menu) {
         this.element = element;
         this.parent = parent;
-        this.height = height;
 
         this.element.addEventListener('click', (e) =>
             this.onMouseClick(e as MouseEvent),
