@@ -7,9 +7,9 @@ export class ThemedContextMenu {
 
     constructor() {
         // add click listener to clear the context menu
-        // document.addEventListener('click', (e) =>
-        // this.onMouseClick(e as MouseEvent),
-        // );
+        document.addEventListener('click', (e) =>
+            this.onMouseClick(e as MouseEvent),
+        );
 
         // create the context menu, but make it invisible
         this.container = document.createElement('div');
