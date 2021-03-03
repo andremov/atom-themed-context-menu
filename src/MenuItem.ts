@@ -10,10 +10,16 @@ export class MenuItem {
     private selected: boolean = false;
     private parent: Menu;
     private submenu?: Menu;
+    private height: number;
 
-    private constructor(element: HTMLHRElement | HTMLDivElement, parent: Menu) {
+    private constructor(
+        element: HTMLHRElement | HTMLDivElement,
+        parent: Menu,
+        height: number,
+    ) {
         this.element = element;
         this.parent = parent;
+        this.height = height;
 
         this.element.addEventListener('click', (e) =>
             this.onMouseClick(e as MouseEvent),
@@ -30,13 +36,13 @@ export class MenuItem {
     ): MenuItem {
         // early return for separators
         if (item.type === 'separator') {
-            return new MenuItem(document.createElement('hr'), parent);
+            return new MenuItem(document.createElement('hr'), parent, 7);
         }
 
         // create base menu item div element and create menu item object from base div
         const divElem = document.createElement('div');
         divElem.classList.add('menu-item');
-        const self = new MenuItem(divElem, parent);
+        const self = new MenuItem(divElem, parent, 23);
 
         // create menu item label span
         const menuItemName = document.createElement('span');
@@ -140,6 +146,6 @@ export class MenuItem {
     }
 
     public getHeight(): number {
-        return this.element.getBoundingClientRect().height;
+        return this.height;
     }
 }
