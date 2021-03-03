@@ -12,7 +12,7 @@
     display: block;
     position: absolute;
     // transform: translate(-5px);
-    z-index: 99999;
+    z-index: 9999;
     @menuBoxPadding: 24px;
     @box-radius: 2px;
 
@@ -66,15 +66,11 @@
             color: @text-color-subtle;
         }
 
-        &:hover {
+        &.selected {
             background-color: fade(@button-background-color-selected, 20%);
         }
 
-        .menu-item-submenu {
-            position: absolute;
-        }
-
-        &.has-sub > .menu-item-keystroke:after {
+        &.has-submenu > .menu-item-key:after {
             content: 'keyboard_arrow_right';
             position: absolute;
             font-family: 'Material Icons';

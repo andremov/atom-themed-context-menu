@@ -34,12 +34,21 @@ export class Menu {
         parent.addMenu(this.domElement);
     }
 
+    public unselectAll() {
+        this.children.forEach((item) => item.unselect());
     }
 
     public deleteContextMenu() {
         this.parent.deleteContextMenu();
     }
 
+    public setVisible(v: boolean) {
+        this.visible = v;
+        if (v) {
+            this.domElement.classList.remove('invisible');
+        } else {
+            this.domElement.classList.add('invisible');
+        }
     }
 
     // generates a style string that positions the context menu next to

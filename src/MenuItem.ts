@@ -18,6 +18,9 @@ export class MenuItem {
         this.element.addEventListener('click', (e) =>
             this.onMouseClick(e as MouseEvent),
         );
+        this.element.addEventListener('mouseenter', (e) =>
+            this.onMouseEnter(e as MouseEvent),
+        );
     }
 
     // static function wrapper to create a MenuItem object from a ContextMenuItemInterface object
@@ -98,6 +101,22 @@ export class MenuItem {
     public hasCommand(): boolean {
         return this.command !== undefined;
     }
+
+    // on mouse enter, open submenu and set as selected
+    private onMouseEnter(e: MouseEvent) {
+        e.stopPropagation();
+
+        console.log(this.element.getBoundingClientRect());
+        this.selected = true;
+        this.parent.unselectAll();
+        this.element.classList.add('selected');
+        this.submenu?.setVisible(true);
+    }
+
+    public unselect() {
+        this.selected = false;
+        this.element.classList.remove('selected');
+        this.submenu?.setVisible(false);
     }
 
     private async execCommand(): Promise<void> {
