@@ -1,20 +1,17 @@
 import { MenuItem } from './MenuItem';
-import { ThemedContextMenu } from './ThemedContextMenu';
+import { TCMHandler } from './main';
 import { ContextMenuItemInterface, MousePosition } from './types';
 
 export class Menu {
     private visible: boolean = true;
     private children: MenuItem[] = [];
     private domElement: HTMLElement;
-    private parent: ThemedContextMenu | Menu;
 
     constructor(
         e: MousePosition,
         items: ContextMenuItemInterface[],
         visible: boolean,
-        parent: ThemedContextMenu | Menu,
     ) {
-        this.parent = parent;
         this.domElement = document.createElement('div');
         this.domElement.classList.add('submenu');
 
@@ -31,7 +28,7 @@ export class Menu {
         // move context menu position to mouse event position
         this.domElement.setAttribute('style', this.getPositionStyleString(e));
 
-        parent.addMenu(this.domElement);
+        TCMHandler.addMenu(this.domElement);
     }
 
     public unselectAll() {
@@ -39,7 +36,7 @@ export class Menu {
     }
 
     public deleteContextMenu() {
-        this.parent.deleteContextMenu();
+        TCMHandler.deleteContextMenu();
     }
 
     public setVisible(v: boolean) {
@@ -70,10 +67,6 @@ export class Menu {
         this.domElement.appendChild(mitem.getElement());
     }
 
-    public addMenu(child: HTMLElement) {
-        this.domElement.appendChild(child);
-    }
-
     // calculate context menu height for positioning function
     private getHeight(): number {
         return this.children
@@ -81,5 +74,9 @@ export class Menu {
             .reduce(function (a, b) {
                 return a + b;
             });
+    }
+
+    public dispose(): void {
+        TCMHandler.removeMenu(this.domElement);
     }
 }

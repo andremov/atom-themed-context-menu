@@ -1,5 +1,4 @@
 import { ContextMenuItemInterface } from './types';
-import { ThemedContextMenu } from './ThemedContextMenu';
 import { Menu } from './Menu';
 
 // handler for the items shown in the context menu, be it a separator or a command
@@ -86,14 +85,7 @@ export class MenuItem {
         return self;
     }
 
-    public addMenu(items: ContextMenuItemInterface[], parent: Menu) {
-        this.submenu = new Menu(
-            { clientX: 0, clientY: 0, isRelative: true },
-            items,
-            false,
-            parent,
-        );
-    }
+    public addMenu(items: ContextMenuItemInterface[]) {}
 
     // on click, execute command and hide the context menu
     private onMouseClick(e: MouseEvent) {
@@ -111,8 +103,6 @@ export class MenuItem {
     // on mouse enter, open submenu and set as selected
     private onMouseEnter(e: MouseEvent) {
         e.stopPropagation();
-
-        console.log(this.element.getBoundingClientRect());
         this.selected = true;
         this.parent.unselectAll();
         this.element.classList.add('selected');

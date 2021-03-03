@@ -39,11 +39,15 @@ export class ThemedContextMenu {
     displayContextMenu(e: MousePosition, items: ContextMenuItemInterface[]) {
         this.deleteContextMenu();
 
-        new Menu(e, items, true, this);
+        new Menu(e, items, true);
     }
 
     addMenu(child: HTMLElement) {
         this.container.appendChild(child);
+    }
+
+    removeMenu(child: HTMLElement) {
+        this.container.removeChild(child);
     }
 
     private onMouseClick(e) {
