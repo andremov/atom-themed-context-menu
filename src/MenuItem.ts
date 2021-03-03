@@ -1,4 +1,3 @@
-import EventEmitter from 'events';
 import { ContextMenuItemInterface } from './types';
 import { ThemedContextMenu } from './ThemedContextMenu';
 import { Menu } from './Menu';
