@@ -142,18 +142,23 @@
         "affectsGlobalScope": true
       },
       "./src/types.ts": {
-        "version": "dfc9ea0694355c4f823447490cf59979f8fc21b65486ac41e593a8b5a339884f",
-        "signature": "ec2d99ec02fdeb2caa804f7a0fefc93f9c8582a35dc1ac1b3dfcb07909c3a4f0",
+        "version": "cbe70a27efaae30a33f88a6fa712b35412a8df1482ba0bdff7ef3c3a77b1bc34",
+        "signature": "79f2e792886cba7a33a72d46a756a684a980429669532cc34678e4cf005aea0b",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "c349d2c41c6f3c99f823447d604bc1e0e221c3a54ae5bdd177dab488a276138e",
-        "signature": "0cd9f0feacbfb788155f3b526c6b7c3539c12c8260f3d502ce46c068d5da926d",
+        "version": "e45dbd0c988586114ffad39b939add42252720def9a5fd76bcb7a7a9e7470205",
+        "signature": "d19f7ee32f7d7b2d89c590f7336a82419b45240be91a25470ed10fc8672e816e",
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
-        "version": "4b3b0e51aef851b435bcd1d3e1577534ce32fa86533223547f4ec33966135966",
-        "signature": "88a5e9cbb16f3fd1a4b1d4ba9769d29a5b262f33bcf45063cd55f0efa53ea8df",
+        "version": "ee95d28b8536821e266428e6f6456bf43a1357eecf886df7b4f2c311aa14e2ef",
+        "signature": "fc6fcb59385441b8a668bd67914b7295dae241cd168ce24879550f2e18f70c86",
+        "affectsGlobalScope": false
+      },
+      "./src/menu.ts": {
+        "version": "98b9eec10c29da6b031012b661b1fcc68ec19c079dd71f4b95b55b4b44fc7d4a",
+        "signature": "a2d1c80c4f2b8cd688e1e1d95c20d35214f3de8180d622412936f80242f2e026",
         "affectsGlobalScope": false
       },
       "./src/main.ts": {
@@ -680,13 +685,19 @@
       "./src/main.ts": [
         "./src/themedcontextmenu.ts"
       ],
+      "./src/menu.ts": [
+        "./src/menuitem.ts",
+        "./src/themedcontextmenu.ts",
+        "./src/types.ts"
+      ],
       "./src/menuitem.ts": [
         "./node_modules/@types/node/events.d.ts",
+        "./src/menu.ts",
         "./src/themedcontextmenu.ts",
         "./src/types.ts"
       ],
       "./src/themedcontextmenu.ts": [
-        "./src/menuitem.ts",
+        "./src/menu.ts",
         "./src/types.ts"
       ]
     },
@@ -927,8 +938,12 @@
         "./node_modules/@types/node/stream.d.ts",
         "./node_modules/@types/node/zlib.d.ts"
       ],
-      "./src/menuitem.ts": [
+      "./src/menu.ts": [
         "./src/themedcontextmenu.ts",
+        "./src/types.ts"
+      ],
+      "./src/menuitem.ts": [
+        "./src/menu.ts",
         "./src/types.ts"
       ],
       "./src/themedcontextmenu.ts": [
@@ -1013,6 +1028,7 @@
       "./node_modules/typescript/lib/lib.es5.d.ts",
       "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "./src/main.ts",
+      "./src/menu.ts",
       "./src/menuitem.ts",
       "./src/themedcontextmenu.ts",
       "./src/types.ts"
@@ -1232,6 +1248,10 @@
       ],
       [
         "./src/main.ts",
+        1
+      ],
+      [
+        "./src/menu.ts",
         1
       ],
       [
