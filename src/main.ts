@@ -1,11 +1,11 @@
-import { ThemedContextMenu } from "./ThemedContextMenu"
+import { ThemedContextMenu } from './ThemedContextMenu';
 
-let tcm = new ThemedContextMenu()
+export const TCMHandler = new ThemedContextMenu();
 
 export function activate() {
-    tcm.hijackFunction()
+    TCMHandler.hijackFunction();
 }
 
 export function deactivate() {
-    tcm.releaseFunction()
+    TCMHandler.releaseFunction();
 }

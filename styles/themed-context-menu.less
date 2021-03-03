@@ -2,7 +2,7 @@
 //
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
-@import "ui-variables";
+@import 'ui-variables';
 
 @title-height: 30px;
 @title-bar-height: 30px;
@@ -10,17 +10,11 @@
 
 .themed-context-menu {
     display: block;
-    // visibility: hidden;
     position: absolute;
-    background-color: @button-background-color;
+    // transform: translate(-5px);
+    z-index: 9999;
     @menuBoxPadding: 24px;
-    padding-bottom: 5px;
     @box-radius: 2px;
-    border-radius: @box-radius;
-    box-shadow: 0px 0px 6px black;
-    transform: translate(-5px);
-    z-index: 99999;
-    width: 300px;
 
     &.invisible {
         display: none;
@@ -38,6 +32,15 @@
         margin-right: 6px;
         border-color: @text-color-subtle;
         opacity: 0.3;
+    }
+
+    .submenu {
+        position: absolute;
+        background-color: @button-background-color;
+        padding-bottom: 5px;
+        border-radius: @box-radius;
+        box-shadow: 0px 0px 6px black;
+        width: 300px;
     }
 
     .menu-item {
@@ -63,18 +66,14 @@
             color: @text-color-subtle;
         }
 
-        &:hover {
+        &.selected {
             background-color: fade(@button-background-color-selected, 20%);
         }
 
-        .menu-item-submenu {
+        &.has-submenu > .menu-item-key:after {
+            content: 'keyboard_arrow_right';
             position: absolute;
-        }
-
-        &.has-sub > .menu-item-keystroke:after {
-            content: "keyboard_arrow_right";
-            position: absolute;
-            font-family: "Material Icons";
+            font-family: 'Material Icons';
             font-size: 21px;
             transform: translate(0.1em, -0.3em);
         }
