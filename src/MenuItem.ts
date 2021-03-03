@@ -8,6 +8,7 @@ export class MenuItem {
     private commandDetail?: string;
     private selected: boolean = false;
     private parent: Menu;
+    private submenuItems?: ContextMenuItemInterface[];
     private submenu?: Menu;
     private height: number;
 
@@ -79,13 +80,11 @@ export class MenuItem {
 
         if (item.submenu !== undefined) {
             divElem.classList.add('has-submenu');
-            self.addMenu(item.submenu, parent);
+            self.submenuItems = item.submenu;
         }
 
         return self;
     }
-
-    public addMenu(items: ContextMenuItemInterface[]) {}
 
     // on click, execute command and hide the context menu
     private onMouseClick(e: MouseEvent) {
@@ -106,7 +105,19 @@ export class MenuItem {
         this.selected = true;
         this.parent.unselectAll();
         this.element.classList.add('selected');
-        this.submenu?.setVisible(true);
+        if (this.submenuItems) {
+            if (!this.submenu) {
+                let position = this.element.getBoundingClientRect();
+                let fakeEvent = {
+                    clientX: position.left + 300,
+                    clientY: position.top,
+                };
+                this.submenu = new Menu(fakeEvent, this.submenuItems, false);
+                this.submenu.setVisible(true);
+            } else {
+                this.submenu.setVisible(true);
+            }
+        }
     }
 
     public unselect() {
