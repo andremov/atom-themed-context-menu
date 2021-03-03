@@ -11,5 +11,5 @@ export interface ContextMenuItemInterface {
 export interface MousePosition {
     clientX: number;
     clientY: number;
-    isRelative?: boolean;
+    isSubmenu: boolean;
 }

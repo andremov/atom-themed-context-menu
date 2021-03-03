@@ -51,13 +51,23 @@ export class Menu {
     // generates a style string that positions the context menu next to
     // mouse event, while also preventing it from overflowing
     private getPositionStyleString(e: MousePosition): string {
-        let x = e.clientX + 10 + 5;
-        let y = e.clientY + 5;
+        let x1 = e.clientX + (!e.isSubmenu ? 10 : 0);
+        let y1 = e.clientY + (!e.isSubmenu ? 5 : 0);
 
-        x = Math.min(x, window.innerWidth - 310);
-        y = Math.min(y, window.innerHeight - this.getHeight() - 10);
+        let x2 = Math.min(x1, window.innerWidth - 310);
+        let y2 = Math.min(y1, window.innerHeight - this.getHeight() - 10);
 
-        return 'top:' + y + 'px; left:' + x + 'px';
+        if (e.isSubmenu) {
+            if (x1 !== x2) {
+                let altx1 = e.clientX - 600;
+                let altx2 = Math.max(altx1, 0);
+                if (altx1 === altx2) {
+                    x2 = altx1;
+                }
+            }
+        }
+
+        return 'top:' + y2 + 'px; left:' + x2 + 'px';
     }
 
     // adds a context menu item to context menu

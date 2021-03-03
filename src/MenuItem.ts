@@ -111,6 +111,7 @@ export class MenuItem {
                 let fakeEvent = {
                     clientX: position.left + 300,
                     clientY: position.top,
+                    isSubmenu: true,
                 };
                 this.submenu = new Menu(fakeEvent, this.submenuItems, false);
                 this.submenu.setVisible(true);
