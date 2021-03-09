@@ -147,8 +147,8 @@
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
-        "version": "fc9fdc1410a299050c2d74b09e4d56010b914749e3025c6b6284aee44992aa66",
-        "signature": "9e36b998f34107daba8b2d26caa621b4c662986c912afc34294e906e2b2dd43f",
+        "version": "f9b60de1386a8acc1f39d330fbfdd2135ca42653c10dd5c55e5bd244a6cac452",
+        "signature": "ea198469e5b5f5fc5a4a0dce21580a34dbbd321b8bfeda94f4653693858c053e",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
