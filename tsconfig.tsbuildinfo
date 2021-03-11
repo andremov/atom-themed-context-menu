@@ -142,13 +142,13 @@
         "affectsGlobalScope": true
       },
       "./src/types.ts": {
-        "version": "9e5f9bb823a320bc642d4673c0432a76ee13b79b8fa2981f50768a3bf2f70da6",
-        "signature": "e80dcef0267822ce5f7127659b259ab93d9fd56d2228e0f8d6104776a97a310c",
+        "version": "4ef4dd65df901c2eff38203ad306650fe8b8baeee4e72fdbe3df7d26dc5efb6a",
+        "signature": "a76479c405465d95dbb1db05ac10969916e95feac0e27dae08dd7e969513d7b8",
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
-        "version": "f9b60de1386a8acc1f39d330fbfdd2135ca42653c10dd5c55e5bd244a6cac452",
-        "signature": "ea198469e5b5f5fc5a4a0dce21580a34dbbd321b8bfeda94f4653693858c053e",
+        "version": "7eda5a9c6acb9447368adba18589838884c6aca26f89ac144fb109fdcb3dfd5b",
+        "signature": "41e58aacf9fa1c7046ded44b19bb4b5a4bdac72f7340665ee013fefab221896b",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
@@ -162,8 +162,8 @@
         "affectsGlobalScope": false
       },
       "./src/menu.ts": {
-        "version": "4328dc2956c74a47a8662453d77f57f90b582bf783d9f70cfbfe4790b80eccad",
-        "signature": "737e52cdb7982c7dd78c4dc99430265b2dbaf0f731b7cfa78f97fa6f2c455266",
+        "version": "82fff2677ea658a13856df033490fba53b88220e63f7edce48ff548031b381f3",
+        "signature": "c1f2d77e85f763f0b371dfa9900e64a0beee18b82e5e280b3c130ea97c8657ff",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/node/globals.d.ts": {
@@ -441,7 +441,7 @@
         "./node_modules/@types",
         "./types"
       ],
-      "pathsBasePath": "D:/Developer/Web/themed-context-menu",
+      "pathsBasePath": "C:/Users/tjbrix/Documents/projects/GitHub/atom-themed-context-menu",
       "noEmit": true,
       "configFilePath": "./tsconfig.json"
     },
@@ -1240,10 +1240,6 @@
       ],
       [
         "./node_modules/typescript/lib/lib.es2018.d.ts",
-        1
-      ],
-      [
-        "./src/contextelement.ts",
         1
       ],
       [

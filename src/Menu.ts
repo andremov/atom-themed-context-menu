@@ -6,12 +6,15 @@ export class Menu {
     private visible: boolean = true;
     private children: MenuItem[] = [];
     private domElement: HTMLElement;
+    public target: EventTarget | null;
 
     constructor(
         e: MousePosition,
         items: ContextMenuItemInterface[],
         visible: boolean,
     ) {
+        this.target = e.target;
+
         this.domElement = document.createElement('div');
         this.domElement.classList.add('submenu');
 
@@ -24,6 +27,7 @@ export class Menu {
         items.forEach((element) => {
             this.addItem(element);
         });
+
 
         // move context menu position to mouse event position
         this.domElement.setAttribute('style', this.getPositionStyleString(e));
