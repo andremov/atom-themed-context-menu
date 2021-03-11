@@ -8,8 +8,6 @@ export interface ContextMenuItemInterface {
 }
 
 // used for mouse events
-export interface MousePosition {
-    clientX: number;
-    clientY: number;
-    isSubmenu: boolean;
+export interface MousePosition extends MouseEvent {
+    isSubmenu?: boolean;
 }

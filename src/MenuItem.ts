@@ -11,15 +11,19 @@ export class MenuItem {
     private submenuItems?: ContextMenuItemInterface[];
     private submenu?: Menu;
     private height: number;
+    private target: EventTarget | null;
 
     private constructor(
         element: HTMLHRElement | HTMLDivElement,
         parent: Menu,
         height: number,
+        target: EventTarget | null,
     ) {
         this.element = element;
         this.parent = parent;
         this.height = height;
+        this.target = target;
+
 
         this.element.addEventListener('click', (e) =>
             this.onMouseClick(e as MouseEvent),
@@ -36,13 +40,13 @@ export class MenuItem {
     ): MenuItem {
         // early return for separators
         if (item.type === 'separator') {
-            return new MenuItem(document.createElement('hr'), parent, 7);
+            return new MenuItem(document.createElement('hr'), parent, 7, null);
         }
 
         // create base menu item div element and create menu item object from base div
         const divElem = document.createElement('div');
         divElem.classList.add('menu-item');
-        const self = new MenuItem(divElem, parent, 23);
+        const self = new MenuItem(divElem, parent, 23, parent.target);
 
         // create menu item label span
         const menuItemName = document.createElement('span');
@@ -109,6 +113,8 @@ export class MenuItem {
             if (!this.submenu) {
                 let position = this.element.getBoundingClientRect();
                 let fakeEvent = {
+                    ...e,
+                    target: this.target,
                     clientX: position.left + 300,
                     clientY: position.top,
                     isSubmenu: true,
@@ -128,11 +134,13 @@ export class MenuItem {
     }
 
     private async execCommand(): Promise<void> {
+
         if (!this.hasCommand()) {
             return;
         }
 
         let target =
+            this.target ||
             (atom.workspace.getActiveTextEditor() as any)?.getElement() ||
             (atom.workspace.getActivePane() as any).getElement();
 
