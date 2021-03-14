@@ -3,94 +3,98 @@ import { TCMHandler } from './main';
 import { ContextMenuItemInterface, MousePosition } from './types';
 
 export class Menu {
-    private visible: boolean = true;
-    private children: MenuItem[] = [];
-    private domElement: HTMLElement;
-    public target: EventTarget | null;
+	private visible: boolean = true;
+	private children: MenuItem[] = [];
+	private domElement: HTMLElement;
+	public target: EventTarget | null;
 
-    constructor(
-        e: MousePosition,
-        items: ContextMenuItemInterface[],
-        visible: boolean,
-    ) {
-        this.target = e.target;
+	constructor(
+		e: MousePosition,
+		items: ContextMenuItemInterface[],
+		visible: boolean,
+	) {
+		this.target = e.target;
 
-        this.domElement = document.createElement('div');
-        this.domElement.classList.add('submenu');
+		this.domElement = document.createElement('div');
+		this.domElement.classList.add('submenu');
 
-        if (!visible) {
-            this.visible = false;
-            this.domElement.classList.add('invisible');
-        }
+		if (!visible) {
+			this.visible = false;
+			this.domElement.classList.add('invisible');
+		}
 
-        // add context menu items to context menu
-        items.forEach((element) => {
-            this.addItem(element);
-        });
+		// add context menu items to context menu
+		items.forEach((element) => {
+			this.addItem(element);
+		});
 
 
-        // move context menu position to mouse event position
-        this.domElement.setAttribute('style', this.getPositionStyleString(e));
+		// move context menu position to mouse event position
+		this.domElement.setAttribute('style', this.getPositionStyleString(e));
 
-        TCMHandler.addMenu(this.domElement);
-    }
+		TCMHandler.addMenu(this.domElement);
+	}
 
-    public unselectAll() {
-        this.children.forEach((item) => item.unselect());
-    }
+	public unselectAll() {
+		this.children.forEach((item) => item.unselect());
+	}
 
-    public deleteContextMenu() {
-        TCMHandler.deleteContextMenu();
-    }
+	public deleteContextMenu() {
+		TCMHandler.deleteContextMenu();
+	}
 
-    public setVisible(v: boolean) {
-        this.visible = v;
-        if (v) {
-            this.domElement.classList.remove('invisible');
-        } else {
-            this.domElement.classList.add('invisible');
-        }
-    }
+	public setVisible(v: boolean) {
+		this.visible = v;
+		if (v) {
+			this.domElement.classList.remove('invisible');
+		} else {
+			this.domElement.classList.add('invisible');
+		}
+	}
 
-    // generates a style string that positions the context menu next to
-    // mouse event, while also preventing it from overflowing
-    private getPositionStyleString(e: MousePosition): string {
-        let x1 = e.clientX + (!e.isSubmenu ? 10 : 0);
-        let y1 = e.clientY + (!e.isSubmenu ? 5 : 0);
+	// generates a style string that positions the context menu next to
+	// mouse event, while also preventing it from overflowing
+	private getPositionStyleString(e: MousePosition): string {
+		let x1 = e.clientX + (!e.isSubmenu ? 10 : 0);
+		let y1 = e.clientY + (!e.isSubmenu ? 5 : 0);
 
-        let x2 = Math.min(x1, window.innerWidth - 310);
-        let y2 = Math.min(y1, window.innerHeight - this.getHeight() - 10);
+		let x2 = Math.min(x1, window.innerWidth - 310);
+		let y2 = Math.min(y1, window.innerHeight - this.getHeight() - 10);
 
-        if (e.isSubmenu) {
-            if (x1 !== x2) {
-                let altx1 = e.clientX - 600;
-                let altx2 = Math.max(altx1, 0);
-                if (altx1 === altx2) {
-                    x2 = altx1;
-                }
-            }
-        }
+		if (e.isSubmenu) {
+			if (x1 !== x2) {
+				let altx1 = e.clientX - 600;
+				let altx2 = Math.max(altx1, 0);
+				if (altx1 === altx2) {
+					x2 = altx1;
+				}
+			}
+		}
 
-        return 'top:' + y2 + 'px; left:' + x2 + 'px';
-    }
+		return 'top:' + y2 + 'px; left:' + x2 + 'px';
+	}
 
-    // adds a context menu item to context menu
-    private addItem(item: ContextMenuItemInterface): void {
-        const mitem = MenuItem.createMenuItem(item, this);
-        this.children.push(mitem);
-        this.domElement.appendChild(mitem.getElement());
-    }
+	// adds a context menu item to context menu
+	private addItem(item: ContextMenuItemInterface): void {
+		const mitem = MenuItem.createMenuItem(item, this);
+		this.children.push(mitem);
+		this.domElement.appendChild(mitem.getElement());
+	}
 
-    // calculate context menu height for positioning function
-    private getHeight(): number {
-        return this.children
-            .map((item) => item.getHeight())
-            .reduce(function (a, b) {
-                return a + b;
-            });
-    }
+	// calculate context menu height for positioning function
+	private getHeight(): number {
+		if (this.children.length === 0) {
+			return 0
+		}
 
-    public dispose(): void {
-        TCMHandler.removeMenu(this.domElement);
-    }
+		return this.children
+			.map((item) => item.getHeight())
+			.reduce(function(a, b) {
+				return a + b;
+			});
+	}
+
+	public dispose(): void {
+		TCMHandler.removeMenu(this.domElement);
+	}
 }
