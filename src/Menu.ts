@@ -73,9 +73,9 @@ export class Menu {
 		}
 
 		x2 = Math.max(0, x2)
-		y2 = Math.max(10, y2) / window.innerHeight * 100
+		y2 = Math.max(10, y2)
 
-		return 'top:' + y2 + '%; left:' + x2 + 'px';
+		return 'top:' + y2 + 'px; left:' + x2 + 'px';
 	}
 
 	// adds a context menu item to context menu
