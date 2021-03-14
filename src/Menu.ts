@@ -49,6 +49,7 @@ export class Menu {
 			this.domElement.classList.remove('invisible');
 		} else {
 			this.domElement.classList.add('invisible');
+			this.unselectAll();
 		}
 	}
 
@@ -71,7 +72,10 @@ export class Menu {
 			}
 		}
 
-		return 'top:' + y2 + 'px; left:' + x2 + 'px';
+		x2 = Math.max(0, x2)
+		y2 = Math.max(10, y2) / window.innerHeight * 100
+
+		return 'top:' + y2 + '%; left:' + x2 + 'px';
 	}
 
 	// adds a context menu item to context menu
