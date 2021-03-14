@@ -142,17 +142,17 @@
         "affectsGlobalScope": true
       },
       "./src/types.ts": {
-        "version": "4ef4dd65df901c2eff38203ad306650fe8b8baeee4e72fdbe3df7d26dc5efb6a",
+        "version": "3c9f2a44a3ff3954ab960e3e12697028ad05d2b56bdbfd06f8fa276ce6fe7265",
         "signature": "a76479c405465d95dbb1db05ac10969916e95feac0e27dae08dd7e969513d7b8",
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
-        "version": "7eda5a9c6acb9447368adba18589838884c6aca26f89ac144fb109fdcb3dfd5b",
+        "version": "cfc94636f1118cde7cdfec30f28a8104b2dbb45f4cc46d69f05475c25befe4ba",
         "signature": "41e58aacf9fa1c7046ded44b19bb4b5a4bdac72f7340665ee013fefab221896b",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "8adce35d1c544d46ff5a0f37b8ebf7c03740b77750b64f0847173ae281b3f882",
+        "version": "b3b1475f7c5f5cf4b714658d40dd43f1ef5cdc76aaa0b67f942e043c749ede56",
         "signature": "76e0a09776bc55c7e7d180a2ae1ec5a6906109144eed72611632b9cc608b2dff",
         "affectsGlobalScope": false
       },
@@ -162,7 +162,7 @@
         "affectsGlobalScope": false
       },
       "./src/menu.ts": {
-        "version": "82fff2677ea658a13856df033490fba53b88220e63f7edce48ff548031b381f3",
+        "version": "d93af5fc3f7bea4571fd68a3a186e9e5b4b4795c42000784ec235091d1cdec5b",
         "signature": "c1f2d77e85f763f0b371dfa9900e64a0beee18b82e5e280b3c130ea97c8657ff",
         "affectsGlobalScope": false
       },
@@ -441,7 +441,7 @@
         "./node_modules/@types",
         "./types"
       ],
-      "pathsBasePath": "C:/Users/tjbrix/Documents/projects/GitHub/atom-themed-context-menu",
+      "pathsBasePath": "D:/Developer/Web/themed-context-menu",
       "noEmit": true,
       "configFilePath": "./tsconfig.json"
     },
