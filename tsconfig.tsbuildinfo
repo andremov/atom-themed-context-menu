@@ -152,7 +152,7 @@
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "1ab9e549a239e98f711b913238ac218ebf642ac744551bbb13633b59ac8f8d5c",
+        "version": "1b493ab911f2155dac02e3e1295d1403e1fc1d363f3a02331911eb91318257bf",
         "signature": "76e0a09776bc55c7e7d180a2ae1ec5a6906109144eed72611632b9cc608b2dff",
         "affectsGlobalScope": false
       },
@@ -162,7 +162,7 @@
         "affectsGlobalScope": false
       },
       "./src/menu.ts": {
-        "version": "62dcac99d76d96881c6b1da5a7a94ff92867ca5b9a1e27f73b1a535e602e017e",
+        "version": "0910fb03f8604570770ef2c6854c3be9dcf9a4ff63279751c28a8cc8643a6b20",
         "signature": "c1f2d77e85f763f0b371dfa9900e64a0beee18b82e5e280b3c130ea97c8657ff",
         "affectsGlobalScope": false
       },
