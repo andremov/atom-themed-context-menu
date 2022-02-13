@@ -4,6 +4,7 @@ import { ContextMenuItemInterface, MousePosition } from './types';
 export class ThemedContextMenu {
 	private hijackedFunction: Function | undefined;
 	private readonly container: HTMLElement;
+	private activeMenu: Menu | undefined;
 
 	constructor() {
 		// add click listener to clear the context menu
@@ -39,7 +40,7 @@ export class ThemedContextMenu {
 		this.deleteContextMenu();
 
 		if (items.length > 0) {
-			new Menu(e, items, true);
+			this.activeMenu = new Menu(e, items, true);
 		}
 	}
 
