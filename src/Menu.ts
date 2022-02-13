@@ -4,8 +4,9 @@ import { ContextMenuItemInterface, MousePosition } from './types';
 
 export class Menu {
 	private visible: boolean = true;
+	private readonly childrenData: ContextMenuItemInterface[] = [];
 	private children: MenuItem[] = [];
-	private domElement: HTMLElement;
+	private readonly domElement: HTMLElement;
 	public target: EventTarget | null;
 
 	constructor(

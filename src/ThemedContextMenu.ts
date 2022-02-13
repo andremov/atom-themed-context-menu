@@ -3,7 +3,7 @@ import { ContextMenuItemInterface, MousePosition } from './types';
 
 export class ThemedContextMenu {
 	private hijackedFunction: Function | undefined;
-	private container: HTMLElement;
+	private readonly container: HTMLElement;
 
 	constructor() {
 		// add click listener to clear the context menu
@@ -14,10 +14,9 @@ export class ThemedContextMenu {
 		// create the context menu, but make it invisible
 		this.container = document.createElement('div');
 		this.container.classList.add('themed-context-menu');
-		// this.activeContextMenu.classList.add('invisible');
 
 		let aws = document.querySelector('atom-workspace');
-		aws ?.appendChild(this.container);
+		aws?.appendChild(this.container);
 	}
 
 	// hijack context menu event function

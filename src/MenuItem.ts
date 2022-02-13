@@ -3,15 +3,15 @@ import { Menu } from './Menu';
 
 // handler for the items shown in the context menu, be it a separator or a command
 export class MenuItem {
-    private element: HTMLHRElement | HTMLDivElement;
+    private readonly element: HTMLHRElement | HTMLDivElement;
     private command?: string;
     private commandDetail?: string;
     private selected: boolean = false;
     private parent: Menu;
     private submenuItems?: ContextMenuItemInterface[];
     private submenu?: Menu;
-    private height: number;
-    private target: EventTarget | null;
+    private readonly height: number;
+    private readonly target: EventTarget | null;
 
     private constructor(
         element: HTMLHRElement | HTMLDivElement,
