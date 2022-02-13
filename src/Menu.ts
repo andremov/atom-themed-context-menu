@@ -23,6 +23,10 @@ export class Menu {
 			this.domElement.classList.add('invisible');
 		}
 
+		if (items[0].type === "separator") {
+			items.splice(0,1);
+		}
+
 		// add context menu items to context menu
 		items.forEach((element) => {
 			this.addItem(element);
