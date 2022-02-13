@@ -85,9 +85,9 @@ export class Menu {
 
 	// adds a context menu item to context menu
 	private addItem(item: ContextMenuItemInterface): void {
-		const mitem = MenuItem.createMenuItem(item, this);
-		this.children.push(mitem);
-		this.domElement.appendChild(mitem.getElement());
+		const menuItem = MenuItem.createMenuItem(item, this);
+		this.children.push(menuItem);
+		this.domElement.appendChild(menuItem.getElement());
 	}
 
 	// calculate context menu height for positioning function
