@@ -40,20 +40,17 @@
         background-color: @button-background-color;
         padding-bottom: 5px;
         border-radius: @box-radius;
-        box-shadow: 0px 0px 6px black;
+        box-shadow: 0 0 6px black;
         width: 300px;
-		max-height: 95%;
-		overflow-y: scroll;
+		max-height: 90%;
+		overflow-y: auto;
     }
 
     .menu-item {
         display: flex;
         position: relative;
         justify-content: space-between;
-        padding-left: @menuBoxPadding;
-        padding-right: @menuBoxPadding;
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding: 3px @menuBoxPadding;
         color: @text-color-highlight;
         animation-duration: 0.15s;
         transform-origin: center;
