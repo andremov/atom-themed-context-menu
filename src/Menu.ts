@@ -143,14 +143,18 @@ export class Menu {
 
 	specialKeyHandle(e) {
 		switch(e.key) {
-			// case "Backspace":
-				// const searchInput = document.getElementById('context-menu-search-input')
-				// const innerHTML = searchInput?.innerHTML;
-				// searchInput?.innerHTML = innerHTML
+			case "Escape":
+				const searchInput = <HTMLInputElement>document.getElementById('context-menu-search-input');
+				if (searchInput.value.length === 0) {
+					this.deleteContextMenu();
+				}  else {
+					searchInput.value = '';
+					this.clearSearch();
+				}
+				return;
 			case "Enter":
 				this.fireCommand();
 				return;
-			// case "Delete":
 			case "ArrowUp":
 				this.navigate("Up");
 				return;
@@ -210,9 +214,13 @@ export class Menu {
 		}
 	}
 
+	clearSearch() {
+		this.items.forEach(item => item.showElement());
+	}
+
 	searchItem(event) {
 		const inputString = event.target.value;
-		this.items.forEach(item => item.showElement());
+		this.clearSearch();
 		this.items.filter(item => !item.searchResult(inputString)).forEach(item => item.hideElement());
 	}
 }
