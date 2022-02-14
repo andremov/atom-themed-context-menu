@@ -4,18 +4,35 @@
 // for a full listing of what's available.
 @import 'ui-variables';
 
-@title-height: 30px;
-@title-bar-height: 30px;
-@menu-margin: 10px;
 
 .themed-context-menu {
     display: block;
     position: absolute;
-    // transform: translate(-5px);
     z-index: 9999;
     @menuBoxPadding: 24px;
-    @box-radius: 2px;
+    @box-radius: 4px;
 	height: 100%;
+
+    .context-menu-search-container {
+        background-color: @button-background-color;
+        color: @text-color-highlight;
+        padding: 5px @menuBoxPadding;
+        outline: none;
+        height: 40px;
+
+        input {
+            background-color: #00000030;
+            padding: 2px 5px;
+            border: 1px solid #00000050;
+            border-radius: 5px;
+            width: 100%;
+            height: 100%;
+
+            &:focus {
+                box-shadow: 0 0 2px 2px #009BD350;
+            }
+        }
+    }
 
     &.invisible {
         display: none;
@@ -25,13 +42,11 @@
         background-color: @text-color-highlight;
     }
 
-    hr {
-        line-height: 1;
-        margin-top: 3px;
-        margin-bottom: 3px;
-        margin-left: 6px;
-        margin-right: 6px;
-        border-color: @text-color-subtle;
+    .separator {
+        height: 1px;
+        margin: 0;
+        background-color: @text-color-subtle;
+        width: 100%;
         opacity: 0.3;
     }
 
@@ -55,6 +70,13 @@
         animation-duration: 0.15s;
         transform-origin: center;
         cursor: pointer;
+
+        &.not-search-result {
+            background-color: #00000030;
+            .menu-item-name, .menu-item-key {
+                opacity: 0.5;
+            }
+        }
 
         &.disabled {
             color: @text-color-subtle;
@@ -86,9 +108,5 @@
     & > .menu-item:nth-child(1) {
         border-top-left-radius: @box-radius;
         border-top-right-radius: @box-radius;
-    }
-
-    & > hr:last-child {
-        display: none;
     }
 }

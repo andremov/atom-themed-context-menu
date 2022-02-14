@@ -3,21 +3,16 @@ import { ContextMenuItemInterface, MousePosition } from './types';
 
 export class ThemedContextMenu {
 	private hijackedFunction: Function | undefined;
-	private readonly container: HTMLElement;
+	private readonly parentContainer: HTMLElement;
 	private activeMenu: Menu | undefined;
 
 	constructor() {
-		// add click listener to clear the context menu
-		document.addEventListener('click', (e) =>
-			this.onMouseClick(e as MouseEvent),
-		);
-
-		// create the context menu, but make it invisible
-		this.container = document.createElement('div');
-		this.container.classList.add('themed-context-menu');
+		// create the context menu container
+		this.parentContainer = document.createElement('div');
+		this.parentContainer.classList.add('themed-context-menu');
 
 		let aws = document.querySelector('atom-workspace');
-		aws?.appendChild(this.container);
+		aws?.appendChild(this.parentContainer);
 	}
 
 	// hijack context menu event function
@@ -38,27 +33,19 @@ export class ThemedContextMenu {
 
 	displayContextMenu(e: MousePosition, items: ContextMenuItemInterface[]) {
 		this.deleteContextMenu();
-
+		(<HTMLElement>document.activeElement)?.blur();
 		if (items.length > 0) {
-			this.activeMenu = new Menu(e, items, true);
+			setTimeout(() => this.activeMenu = new Menu(e, items, true), 110);
 		}
 	}
 
-	addMenu(child: HTMLElement) {
-		this.container.appendChild(child);
-	}
-
-	removeMenu(child: HTMLElement) {
-		this.container.removeChild(child);
-	}
-
-	private onMouseClick(e) {
-		this.deleteContextMenu();
+	addContextMenu(child: HTMLElement) {
+		this.parentContainer.appendChild(child);
 	}
 
 	deleteContextMenu() {
-		while (this.container.firstChild) {
-			this.container.removeChild(this.container.firstChild);
+		while (this.parentContainer.firstChild) {
+			this.parentContainer.removeChild(this.parentContainer.firstChild);
 		}
 	}
 }

@@ -142,18 +142,18 @@
         "affectsGlobalScope": true
       },
       "./src/types.ts": {
-        "version": "3c9f2a44a3ff3954ab960e3e12697028ad05d2b56bdbfd06f8fa276ce6fe7265",
-        "signature": "a76479c405465d95dbb1db05ac10969916e95feac0e27dae08dd7e969513d7b8",
+        "version": "c28080dc6eeb919ae0eb02cb61f1cfc1c76b51d914f600bc43218891ca67b84a",
+        "signature": "930ab898ded0326a69bf296b0d20b2a7d30f5e0b4fafd115d4da4544fee6ccbb",
         "affectsGlobalScope": false
       },
       "./src/menuitem.ts": {
-        "version": "cfc94636f1118cde7cdfec30f28a8104b2dbb45f4cc46d69f05475c25befe4ba",
-        "signature": "41e58aacf9fa1c7046ded44b19bb4b5a4bdac72f7340665ee013fefab221896b",
+        "version": "eb8bad86574a74f808a1df378a2c9b4e70188bc2177b450775766ddc6d451c73",
+        "signature": "4dbeb641593a270ebc6a9e017e746ba20af9040c61644df5a793018dd1bb1e0a",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
-        "version": "1b493ab911f2155dac02e3e1295d1403e1fc1d363f3a02331911eb91318257bf",
-        "signature": "76e0a09776bc55c7e7d180a2ae1ec5a6906109144eed72611632b9cc608b2dff",
+        "version": "5c529c88cff3b2b1c03fcefabff19c4874cb739f1f5cbcab17c71337a19c006e",
+        "signature": "22087ac37609e6f2bcd94165fc2b363f11998e82d4787ab17177042fd5c4363f",
         "affectsGlobalScope": false
       },
       "./src/main.ts": {
@@ -161,9 +161,14 @@
         "signature": "298891eab8b266f75d432b64c79cdd73baf992cc0f46cf204f22b2832a978bcf",
         "affectsGlobalScope": false
       },
+      "./src/utils.ts": {
+        "version": "2aba2a6589f8910b47dff0b5a1d8f4edc217d3255871d587c7671695911fc6c3",
+        "signature": "c7f5127cd1dd9ba5acae8e8f219c36ecea3443159d853583471355687c8c961d",
+        "affectsGlobalScope": false
+      },
       "./src/menu.ts": {
-        "version": "0910fb03f8604570770ef2c6854c3be9dcf9a4ff63279751c28a8cc8643a6b20",
-        "signature": "c1f2d77e85f763f0b371dfa9900e64a0beee18b82e5e280b3c130ea97c8657ff",
+        "version": "28e372ede9bef07684fb438d431f46ec5cfbae39380b68a96a8a27d4fb8913ef",
+        "signature": "df11b0f43112d590ace6d84ecea3d061440f3e86e076006a907f02cfd616f2b4",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/node/globals.d.ts": {
@@ -441,7 +446,7 @@
         "./node_modules/@types",
         "./types"
       ],
-      "pathsBasePath": "D:/Developer/Web/themed-context-menu",
+      "pathsBasePath": "D:/Developer/atom-themed-context-menu",
       "noEmit": true,
       "configFilePath": "./tsconfig.json"
     },
@@ -688,7 +693,8 @@
       "./src/menu.ts": [
         "./src/main.ts",
         "./src/menuitem.ts",
-        "./src/types.ts"
+        "./src/types.ts",
+        "./src/utils.ts"
       ],
       "./src/menuitem.ts": [
         "./src/menu.ts",
@@ -696,6 +702,9 @@
       ],
       "./src/themedcontextmenu.ts": [
         "./src/menu.ts",
+        "./src/types.ts"
+      ],
+      "./src/utils.ts": [
         "./src/types.ts"
       ]
     },
@@ -948,6 +957,9 @@
       ],
       "./src/themedcontextmenu.ts": [
         "./src/types.ts"
+      ],
+      "./src/utils.ts": [
+        "./src/types.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1031,7 +1043,8 @@
       "./src/menu.ts",
       "./src/menuitem.ts",
       "./src/themedcontextmenu.ts",
-      "./src/types.ts"
+      "./src/types.ts",
+      "./src/utils.ts"
     ],
     "affectedFilesPendingEmit": [
       [
@@ -1260,6 +1273,10 @@
       ],
       [
         "./src/types.ts",
+        1
+      ],
+      [
+        "./src/utils.ts",
         1
       ]
     ]

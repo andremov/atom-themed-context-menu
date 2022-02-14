@@ -1,31 +1,70 @@
 import { MenuItem } from './MenuItem';
 import { TCMHandler } from './main';
-import { ContextMenuItemInterface, MousePosition } from './types';
+import { ContextMenuItemInterface, MousePosition, ContextMenuCommandItem, MenuPosition } from './types';
+import { InterfaceNames, menuItemTypeCheck } from './utils';
 
 export class Menu {
-	private visible: boolean = true;
-	private readonly childrenData: ContextMenuItemInterface[] = [];
-	private children: MenuItem[] = [];
+	private readonly itemData: ContextMenuItemInterface[] = [];
+	private items: MenuItem[] = [];
 	private readonly domElement: HTMLElement;
-	public target: EventTarget | null;
+	private readonly position: MenuPosition;
+	private visible: boolean = true;
+	private readonly hasSearchBox: boolean;
 
 	constructor(
 		e: MousePosition,
 		items: ContextMenuItemInterface[],
 		visible: boolean,
 	) {
-		this.target = e.target;
+		this.itemData = items;
+		this.hasSearchBox = false;
 
 		this.domElement = document.createElement('div');
 		this.domElement.classList.add('submenu');
+
+		if (!e.isSubmenu) {
+			const searchInputContainer = document.createElement('div');
+			searchInputContainer.classList.add('context-menu-search-container');
+
+			const searchInput = document.createElement('input');
+			searchInput.type = 'search';
+			searchInput.id = 'context-menu-search-input';
+			searchInput.placeholder = 'Search';
+			searchInput.addEventListener('input', (e) => this.searchItem(e))
+			searchInput.addEventListener('keydown', (e) => this.specialKeyHandle(e))
+
+			searchInputContainer.appendChild(searchInput);
+			this.domElement.appendChild(searchInputContainer);
+			this.hasSearchBox = true;
+		}
 
 		if (!visible) {
 			this.visible = false;
 			this.domElement.classList.add('invisible');
 		}
 
-		if (items[0].type === "separator") {
+		// delete separator if it's the first or last item
+		if (menuItemTypeCheck(items[0], InterfaceNames.Separator)) {
 			items.splice(0,1);
+		}
+
+		if (menuItemTypeCheck(items[items.length - 1], InterfaceNames.Separator)) {
+			items.splice(items.length - 1, 1);
+		}
+
+		// move split pane commands to a submenu
+		if (!e.isSubmenu) {
+			const splitItems = items.filter(item =>
+				menuItemTypeCheck(item, InterfaceNames.Command) && (<ContextMenuCommandItem>item).id.includes('Split')
+			);
+			items = items.filter(item =>
+				!menuItemTypeCheck(item, InterfaceNames.Command) ||
+				menuItemTypeCheck(item, InterfaceNames.Command) && !(<ContextMenuCommandItem>item).id.includes('Split')
+			);
+			items.splice(9, 0, {
+				id: 'Split Pane',
+				submenu: splitItems,
+			});
 		}
 
 		// add context menu items to context menu
@@ -33,15 +72,21 @@ export class Menu {
 			this.addItem(element);
 		});
 
+		this.position = this.getPositionStyleString(e);
 
 		// move context menu position to mouse event position
-		this.domElement.setAttribute('style', this.getPositionStyleString(e));
+		this.domElement.setAttribute('style', `top: ${this.position.y}px; left: ${this.position.x}px;`);
 
-		TCMHandler.addMenu(this.domElement);
+		TCMHandler.addContextMenu(this.domElement);
+
+		if (!e.isSubmenu) {
+			document.getElementById('context-menu-search-input')?.focus();
+			document.getElementById('context-menu-search-input')?.addEventListener('blur', () => setTimeout(this.deleteContextMenu, 100))
+		}
 	}
 
 	public unselectAll() {
-		this.children.forEach((item) => item.unselect());
+		this.items.forEach((item) => item.unselect());
 	}
 
 	public deleteContextMenu() {
@@ -60,50 +105,114 @@ export class Menu {
 
 	// generates a style string that positions the context menu next to
 	// mouse event, while also preventing it from overflowing
-	private getPositionStyleString(e: MousePosition): string {
-		let x1 = e.clientX + (!e.isSubmenu ? 10 : 0);
-		let y1 = e.clientY + (!e.isSubmenu ? 5 : 0);
-
-		let x2 = Math.min(x1, window.innerWidth - 310);
-		let y2 = Math.min(y1, window.innerHeight - this.getHeight() - 10);
+	private getPositionStyleString(e: MousePosition): MenuPosition {
+		let x = Math.min(e.clientX + (!e.isSubmenu ? 10 : 0), window.innerWidth - 310);
+		let y = Math.min(e.clientY + (!e.isSubmenu ? 5 : 0), window.innerHeight - this.getHeight() - 10);
 
 		if (e.isSubmenu) {
-			if (x1 !== x2) {
-				let altx1 = e.clientX - 600;
-				let altx2 = Math.max(altx1, 0);
-				if (altx1 === altx2) {
-					x2 = altx1;
-				}
+			if (x === window.innerWidth - 310 && e.clientX - 600 >= 0) {
+				x = e.clientX - 600;
 			}
 		}
 
-		x2 = Math.max(0, x2)
-		y2 = Math.max(10, y2)
+		x = Math.max(0, x);
+		y = Math.max(10, y);
 
-		return 'top:' + y2 + 'px; left:' + x2 + 'px';
+		return { x, y };
 	}
 
 	// adds a context menu item to context menu
 	private addItem(item: ContextMenuItemInterface): void {
-		const menuItem = MenuItem.createMenuItem(item, this);
-		this.children.push(menuItem);
+		const menuItem = new MenuItem(this, item);
+		this.items.push(menuItem);
 		this.domElement.appendChild(menuItem.getElement());
 	}
 
 	// calculate context menu height for positioning function
 	private getHeight(): number {
-		if (this.children.length === 0) {
-			return 0
+		if (this.items.length === 0) {
+			return 0;
 		}
 
-		return this.children
+		return this.items
 			.map((item) => item.getHeight())
 			.reduce(function(a, b) {
 				return a + b;
-			});
+			}) + (this.hasSearchBox? 40 : 0);
 	}
 
-	public dispose(): void {
-		TCMHandler.removeMenu(this.domElement);
+	specialKeyHandle(e) {
+		switch(e.key) {
+			// case "Backspace":
+				// const searchInput = document.getElementById('context-menu-search-input')
+				// const innerHTML = searchInput?.innerHTML;
+				// searchInput?.innerHTML = innerHTML
+			case "Enter":
+				this.fireCommand();
+				return;
+			// case "Delete":
+			case "ArrowUp":
+				this.navigate("Up");
+				return;
+			case "ArrowDown":
+				this.navigate("Down");
+				return;
+			case "ArrowLeft":
+				this.navigate("Left");
+				return;
+			case "ArrowRight":
+				this.navigate("Right");
+				return;
+		}
+	}
+
+	fireCommand() {
+		this.items.find(child => child.isSelected())?.callExecCommand()
+	}
+
+	navigate(direction) {
+		const selectedItemIndex = this.items.findIndex(item => item.isSelected());
+		const len = this.items.length;
+		const inDirection = (window.innerWidth - this.position.x) > 610 ? "Right" : "Left";
+		const outDirection = ["Left", "Right"].filter(item => item !== inDirection)[0];
+
+		if (selectedItemIndex && this.items[selectedItemIndex]?.isSubmenu()) {
+			if (this.items[selectedItemIndex].isNavigating()) {
+				if (direction === outDirection) {
+					this.items[selectedItemIndex].setNavigating(false);
+					return;
+				} else {
+					this.items[selectedItemIndex].submenuNavigate(direction);
+					return;
+				}
+			} else if (direction === inDirection) {
+				this.items[selectedItemIndex].setNavigating(true);
+				return;
+			}
+		}
+
+		if (direction === "Up") {
+			let selectIndex = (len + (selectedItemIndex ?? len) - 1) % len;
+			while (this.items[selectIndex].isSeparator()) {
+				selectIndex = (len + selectIndex - 1) % len;
+			}
+			this.items[selectIndex].select();
+			this.items[selectIndex].displaySubmenu();
+			return;
+		} else if (direction === "Down") {
+			let selectIndex = (len + (selectedItemIndex ?? -1) + 1) % len;
+			while (this.items[selectIndex].isSeparator()) {
+				selectIndex = (len + selectIndex + 1) % len;
+			}
+			this.items[selectIndex].select();
+			this.items[selectIndex].displaySubmenu();
+			return;
+		}
+	}
+
+	searchItem(event) {
+		const inputString = event.target.value;
+		this.items.forEach(item => item.showElement());
+		this.items.filter(item => !item.searchResult(inputString)).forEach(item => item.hideElement());
 	}
 }

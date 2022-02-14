@@ -1,158 +1,237 @@
-import { ContextMenuItemInterface } from './types';
+import {
+    ContextMenuCommandItem,
+    ContextMenuItemInterface,
+    ContextMenuSeparatorItem,
+    ContextMenuSubmenuItem, MousePosition,
+} from './types';
 import { Menu } from './Menu';
 
 // handler for the items shown in the context menu, be it a separator or a command
 export class MenuItem {
-    private readonly element: HTMLHRElement | HTMLDivElement;
-    private command?: string;
-    private commandDetail?: string;
+    private readonly domElement: HTMLHRElement | HTMLDivElement;
+    private readonly itemData: ContextMenuItemInterface;
     private selected: boolean = false;
     private parent: Menu;
-    private submenuItems?: ContextMenuItemInterface[];
     private submenu?: Menu;
+    private navSubmenu: boolean = false;
     private readonly height: number;
-    private readonly target: EventTarget | null;
+    private readonly target?: EventTarget;
+    private hidden: boolean = false;
 
-    private constructor(
-        element: HTMLHRElement | HTMLDivElement,
+    constructor(
         parent: Menu,
-        height: number,
-        target: EventTarget | null,
+        item: ContextMenuItemInterface,
+        target?: EventTarget,
     ) {
-        this.element = element;
+        this.itemData = item;
+        this.height = 23;
         this.parent = parent;
-        this.height = height;
         this.target = target;
 
+        let divElem;
+        if ((<ContextMenuSeparatorItem>item).type) {
+            divElem = document.createElement('div')
+            divElem.classList.add('menu-item');
 
-        this.element.addEventListener('click', (e) =>
+            const separator = document.createElement('div');
+            separator.classList.add('separator');
+            divElem.appendChild(separator);
+
+            this.height = 7;
+        }
+
+        if (!(<ContextMenuSeparatorItem>item).type) {
+            // create base menu item div element and create menu item object from base div
+            divElem = document.createElement('div');
+            divElem.classList.add('menu-item');
+
+            // create menu item label span
+            const menuItemName = document.createElement('span');
+            menuItemName.classList.add('menu-item-name');
+
+            menuItemName.innerHTML = (<ContextMenuCommandItem>item).id ?? (<ContextMenuCommandItem>item).label ?? '';
+
+            // create menu item keystroke span
+            const menuItemKey = document.createElement('span');
+            menuItemKey.classList.add('menu-item-key');
+
+            // if it doesn't have a command it might be a submenu
+            if ((<ContextMenuCommandItem>item).command) {
+                // add command data to menu item object
+                // this.command = (<ContextMenuCommandItem>item).command;
+                // this.commandDetail = (<ContextMenuCommandItem>item).commandDetail;
+
+                // if it has a command, it might have a keymap, so search for it
+                const keyStrokes = atom.keymaps.findKeyBindings({
+                    command: (<ContextMenuCommandItem>item).command
+                });
+
+                // if it has a keymap, add it to the item key span element
+                menuItemKey.innerHTML = keyStrokes[0]?.keystrokes.toLocaleLowerCase() ?? '';
+            }
+
+            if ((<ContextMenuSubmenuItem>item).submenu !== undefined) {
+                divElem.classList.add('has-submenu');
+            }
+
+            // append menu item elements to base menu item div
+            divElem.appendChild(menuItemName);
+            divElem.appendChild(menuItemKey);
+        }
+
+        this.domElement = divElem;
+
+        this.domElement.addEventListener('click', (e) =>
             this.onMouseClick(e as MouseEvent),
         );
-        this.element.addEventListener('mouseenter', (e) =>
+        this.domElement.addEventListener('mouseenter', (e) =>
             this.onMouseEnter(e as MouseEvent),
         );
-    }
-
-    // static function wrapper to create a MenuItem object from a ContextMenuItemInterface object
-    public static createMenuItem(
-        item: ContextMenuItemInterface,
-        parent: Menu,
-    ): MenuItem {
-        // early return for separators
-        if (item.type === 'separator') {
-            return new MenuItem(document.createElement('hr'), parent, 7, null);
-        }
-
-        // create base menu item div element and create menu item object from base div
-        const divElem = document.createElement('div');
-        divElem.classList.add('menu-item');
-        const self = new MenuItem(divElem, parent, 23, parent.target);
-
-        // create menu item label span
-        const menuItemName = document.createElement('span');
-        menuItemName.classList.add('menu-item-name');
-        // if it doesnt have a label, what is it?
-        // i guess a separator wont have a label, but other than that?
-        // should i add an early return case for this?
-        menuItemName.innerHTML = item.label ? item.label : '';
-
-        // create menu item key stroke span
-        const menuItemKey = document.createElement('span');
-        menuItemKey.classList.add('menu-item-key');
-
-        // append menu item elements to base menu item div
-        divElem.appendChild(menuItemName);
-        divElem.appendChild(menuItemKey);
-
-        // if it doesnt have a command it might be a submenu
-        if (item.command !== undefined) {
-            // add command data to menu item object
-            self.command = item.command;
-            self.commandDetail = item.commandDetail;
-
-            // if it has a command, it might have a keymap, so search for it
-            const keyStrokes = atom.keymaps.findKeyBindings({
-                command: item.command,
-            });
-
-            // if it has a keymap, add it to the item key span element
-            if (keyStrokes.length > 0) {
-                menuItemKey.innerHTML =
-                    keyStrokes[keyStrokes.length - 1].keystrokes;
-            }
-        }
-
-        if (item.submenu !== undefined) {
-            divElem.classList.add('has-submenu');
-            self.submenuItems = item.submenu;
-        }
-
-        return self;
     }
 
     // on click, execute command and hide the context menu
     private onMouseClick(e: MouseEvent) {
         e.stopPropagation();
+        this.callExecCommand();
+    }
+
+    public callExecCommand() {
         if (this.hasCommand()) {
             this.execCommand();
             this.parent.deleteContextMenu();
+        } else if ((<ContextMenuSubmenuItem>this.itemData).submenu) {
+            this.submenu?.fireCommand();
         }
     }
 
     public hasCommand(): boolean {
-        return this.command !== undefined;
+        return (<ContextMenuCommandItem>this.itemData).command !== undefined;
+    }
+
+    public isSubmenu() {
+        return !!(<ContextMenuSubmenuItem>this.itemData).submenu
     }
 
     // on mouse enter, open submenu and set as selected
     private onMouseEnter(e: MouseEvent) {
-        e.stopPropagation();
-        this.selected = true;
-        this.parent.unselectAll();
-        this.element.classList.add('selected');
-        if (this.submenuItems) {
-            if (!this.submenu) {
-                let position = this.element.getBoundingClientRect();
-                let fakeEvent = {
-                    ...e,
-                    target: this.target,
-                    clientX: position.left + 300,
-                    clientY: position.top,
-                    isSubmenu: true,
-                };
-                this.submenu = new Menu(fakeEvent, this.submenuItems, false);
-                this.submenu.setVisible(true);
-            } else {
-                this.submenu.setVisible(true);
-            }
+        if (this.isSeparator()) {
+            return;
         }
+        e.stopPropagation();
+        this.select();
+        this.displaySubmenu();
+    }
+
+    public createSubmenu() {
+        const submenuItems = (<ContextMenuSubmenuItem>this.itemData).submenu
+        if (submenuItems && !this.submenu) {
+            let position = this.domElement.getBoundingClientRect();
+            let fakeEvent: MousePosition = {
+                target: this.target,
+                clientX: position.left + 300,
+                clientY: position.top,
+                isSubmenu: true,
+            };
+            this.submenu = new Menu(fakeEvent, submenuItems, false);
+        }
+    }
+
+    public displaySubmenu() {
+        this.createSubmenu();
+        this.submenu?.setVisible(true);
+    }
+
+    public select() {
+        this.parent.unselectAll();
+        this.selected = true;
+        this.domElement.classList.add('selected');
     }
 
     public unselect() {
         this.selected = false;
-        this.element.classList.remove('selected');
+        this.domElement.classList.remove('selected');
         this.submenu?.setVisible(false);
     }
 
-    private async execCommand(): Promise<void> {
+    public isSelected() {
+        return this.selected
+    }
 
-        if (!this.hasCommand()) {
-            return;
+    public isNavigating() {
+        return this.navSubmenu;
+    }
+
+    public isSeparator() {
+        return (<ContextMenuSeparatorItem>this.itemData).type;
+    }
+
+    public setNavigating(value) {
+        this.navSubmenu = value;
+        if (value) {
+            this.submenuNavigate("Down");
+        } else {
+            this.unselect();
+            this.select();
+            this.displaySubmenu();
+        }
+    }
+
+    public hideElement() {
+        this.hidden = true;
+        this.domElement.classList.add('not-search-result')
+    }
+
+    public showElement() {
+        this.hidden = false;
+        this.domElement.classList.remove('not-search-result')
+    }
+
+    public submenuNavigate(direction) {
+        if (this.isSubmenu()) {
+            this.submenu?.navigate(direction);
+        }
+    }
+
+    public searchResult(inputString): boolean {
+        if (this.isSeparator()) {
+            return false;
         }
 
+        const submenuItem = (<ContextMenuSubmenuItem>this.itemData);
+        if (submenuItem.submenu) {
+            if (submenuItem.id.toLocaleLowerCase().includes(inputString.toLocaleLowerCase())) {
+                return true;
+            }
+
+            const subItems = submenuItem.submenu.filter(item => (<ContextMenuCommandItem>item).id.toLocaleLowerCase().includes(inputString.toLocaleLowerCase()))
+            this.submenu?.searchItem({ target: { value: inputString } });
+            return subItems.length > 0;
+        }
+
+        const commandItem = (<ContextMenuCommandItem>this.itemData);
+        if (commandItem.id) {
+            return commandItem.id.toLocaleLowerCase().includes(inputString.toLocaleLowerCase());
+        }
+
+        return false;
+    }
+
+    private async execCommand(): Promise<void> {
         let target =
             this.target ||
             (atom.workspace.getActiveTextEditor() as any)?.getElement() ||
             (atom.workspace.getActivePane() as any).getElement();
 
+        const commandItem = (<ContextMenuCommandItem>this.itemData)
         await (atom.commands as any).dispatch(
             target,
-            this.command,
-            this.commandDetail,
+            commandItem.command,
+            commandItem.commandDetail,
         );
     }
 
     public getElement(): HTMLElement {
-        return this.element;
+        return this.domElement;
     }
 
     public getHeight(): number {
