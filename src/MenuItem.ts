@@ -199,20 +199,20 @@ export class MenuItem {
 
         const submenuItem = (<ContextMenuSubmenuItem>this.itemData);
         if (submenuItem.submenu) {
-            if (submenuItem.id.toLocaleLowerCase().includes(inputString.toLocaleLowerCase())) {
+            if ((submenuItem.id ?? submenuItem.label).toLocaleLowerCase().includes(inputString.toLocaleLowerCase())) {
                 return true;
             }
 
             const subItems = submenuItem.submenu.filter(item =>
-                ((<ContextMenuCommandItem>item).id && (<ContextMenuCommandItem>item).label).toLocaleLowerCase().includes(inputString.toLocaleLowerCase())
+                ((<ContextMenuCommandItem>item).id ?? (<ContextMenuCommandItem>item).label).toLocaleLowerCase().includes(inputString.toLocaleLowerCase())
             )
             this.submenu?.searchItem({ target: { value: inputString } });
             return subItems.length > 0;
         }
 
         const commandItem = (<ContextMenuCommandItem>this.itemData);
-        if (commandItem.id) {
-            return commandItem.id.toLocaleLowerCase().includes(inputString.toLocaleLowerCase());
+        if (commandItem.id || commandItem.label) {
+            return (commandItem.id ?? commandItem.label).toLocaleLowerCase().includes(inputString.toLocaleLowerCase());
         }
 
         return false;
