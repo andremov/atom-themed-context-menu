@@ -5,7 +5,10 @@
     "private": false,
     "description": "Replaces Atom's native context menu with a theme-aware context menu that is more inline with Atom's UI design.",
     "scripts": {
-        "build": "node ./esbuild.config.mjs"
+        "build": "node ./esbuild.config.mjs",
+        "patch": "apm publish patch",
+        "minor": "apm publish minor",
+        "major": "apm publish major"
     },
     "repository": {
         "type": "git",
