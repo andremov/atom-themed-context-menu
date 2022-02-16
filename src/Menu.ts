@@ -80,8 +80,9 @@ export class Menu {
 		TCMHandler.addContextMenu(this.domElement);
 
 		if (!e.isSubmenu) {
-			document.getElementById('context-menu-search-input')?.focus();
-			document.getElementById('context-menu-search-input')?.addEventListener('blur', () => setTimeout(this.deleteContextMenu, 100))
+			const searchInput = document.getElementById('context-menu-search-input')
+			searchInput?.focus();
+			searchInput?.addEventListener('blur', () => setTimeout(this.deleteContextMenu, 100))
 		}
 	}
 

@@ -2,9 +2,10 @@ import { Menu } from './Menu';
 import { ContextMenuItemInterface, MousePosition } from './types';
 
 export class ThemedContextMenu {
-	private hijackedFunction: Function | undefined;
+	private hijackedFunction?: Function;
 	private readonly parentContainer: HTMLElement;
-	private activeMenu: Menu | undefined;
+	private activeMenu?: Menu;
+	private prevActiveElement?: HTMLElement;
 
 	constructor() {
 		// create the context menu container
@@ -33,7 +34,8 @@ export class ThemedContextMenu {
 
 	displayContextMenu(e: MousePosition, items: ContextMenuItemInterface[]) {
 		this.deleteContextMenu();
-		(<HTMLElement>document.activeElement)?.blur();
+		this.prevActiveElement = <HTMLElement> document.activeElement;
+		this.prevActiveElement?.blur();
 		if (items.length > 0) {
 			setTimeout(() => this.activeMenu = new Menu(e, items, true), 110);
 		}
@@ -47,5 +49,6 @@ export class ThemedContextMenu {
 		while (this.parentContainer.firstChild) {
 			this.parentContainer.removeChild(this.parentContainer.firstChild);
 		}
+		this.prevActiveElement?.focus();
 	}
 }
