@@ -55,11 +55,11 @@ export class Menu {
 		// move split pane commands to a submenu
 		if (!e.isSubmenu) {
 			const splitItems = items.filter(item =>
-				menuItemTypeCheck(item, InterfaceNames.Command) && (<ContextMenuCommandItem>item).id.includes('Split')
+				menuItemTypeCheck(item, InterfaceNames.Command) && ((<ContextMenuCommandItem>item).id && (<ContextMenuCommandItem>item).label).includes('Split')
 			);
 			items = items.filter(item =>
 				!menuItemTypeCheck(item, InterfaceNames.Command) ||
-				menuItemTypeCheck(item, InterfaceNames.Command) && !(<ContextMenuCommandItem>item).id.includes('Split')
+				menuItemTypeCheck(item, InterfaceNames.Command) && !((<ContextMenuCommandItem>item).id && (<ContextMenuCommandItem>item).label).includes('Split')
 			);
 			items.splice(9, 0, {
 				id: 'Split Pane',

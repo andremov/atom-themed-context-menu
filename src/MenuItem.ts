@@ -203,7 +203,9 @@ export class MenuItem {
                 return true;
             }
 
-            const subItems = submenuItem.submenu.filter(item => (<ContextMenuCommandItem>item).id.toLocaleLowerCase().includes(inputString.toLocaleLowerCase()))
+            const subItems = submenuItem.submenu.filter(item =>
+                ((<ContextMenuCommandItem>item).id && (<ContextMenuCommandItem>item).label).toLocaleLowerCase().includes(inputString.toLocaleLowerCase())
+            )
             this.submenu?.searchItem({ target: { value: inputString } });
             return subItems.length > 0;
         }
