@@ -7,11 +7,11 @@ export enum InterfaceNames {
 export function menuItemTypeCheck(item: ContextMenuItemInterface, interfaceCheck: InterfaceNames): boolean {
     switch(interfaceCheck) {
         case 0:
-            return !!(<ContextMenuSubmenuItem>item).submenu;
+            return !!(<ContextMenuSubmenuItem>item)?.submenu;
         case 1:
-            return !!(<ContextMenuSeparatorItem>item).type;
+            return !!(<ContextMenuSeparatorItem>item)?.type;
         case 2:
-            return !!(<ContextMenuCommandItem>item).command;
+            return !!(<ContextMenuCommandItem>item)?.command;
         default:
             return false
     }

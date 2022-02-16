@@ -5,6 +5,7 @@ import {
     ContextMenuSubmenuItem, MousePosition,
 } from './types';
 import { Menu } from './Menu';
+import { InterfaceNames, menuItemTypeCheck } from './utils';
 
 // handler for the items shown in the context menu, be it a separator or a command
 export class MenuItem {
@@ -29,7 +30,7 @@ export class MenuItem {
         this.target = target;
 
         let divElem;
-        if ((<ContextMenuSeparatorItem>item).type) {
+        if ((<ContextMenuSeparatorItem>item)?.type) {
             divElem = document.createElement('div')
             divElem.classList.add('menu-item');
 
@@ -40,7 +41,7 @@ export class MenuItem {
             this.height = 7;
         }
 
-        if (!(<ContextMenuSeparatorItem>item).type) {
+        if (!(<ContextMenuSeparatorItem>item)?.type) {
             // create base menu item div element and create menu item object from base div
             divElem = document.createElement('div');
             divElem.classList.add('menu-item');
@@ -162,7 +163,7 @@ export class MenuItem {
     }
 
     public isSeparator() {
-        return (<ContextMenuSeparatorItem>this.itemData).type;
+        return menuItemTypeCheck(this.itemData, InterfaceNames.Separator)
     }
 
     public setNavigating(value) {
