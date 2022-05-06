@@ -226,6 +226,7 @@ export class MenuItem {
             (atom.workspace.getActivePane() as any).getElement();
 
         const commandItem = (<ContextMenuCommandItem>this.itemData)
+
         await (atom.commands as any).dispatch(
             target,
             commandItem.command,

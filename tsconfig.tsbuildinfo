@@ -146,9 +146,14 @@
         "signature": "930ab898ded0326a69bf296b0d20b2a7d30f5e0b4fafd115d4da4544fee6ccbb",
         "affectsGlobalScope": false
       },
+      "./src/utils.ts": {
+        "version": "3506d5bca818b3a481a8b0c9f41513339159d1b1bb8d30ef41886830cc77f10a",
+        "signature": "c7f5127cd1dd9ba5acae8e8f219c36ecea3443159d853583471355687c8c961d",
+        "affectsGlobalScope": false
+      },
       "./src/menuitem.ts": {
-        "version": "fa48aca5e110a1be5c88d3775b00acc5b755d153873ffeeded3078ff38b2bb42",
-        "signature": "4dbeb641593a270ebc6a9e017e746ba20af9040c61644df5a793018dd1bb1e0a",
+        "version": "ac9066383f278be0f54bd04c297a0cf2b57799520abf7e0a4bb370f53a72a269",
+        "signature": "2fd99827da98083b61c0bd77e2cb974d9bb4323aa43d982ea8b93eb7fe2eed30",
         "affectsGlobalScope": false
       },
       "./src/themedcontextmenu.ts": {
@@ -157,17 +162,12 @@
         "affectsGlobalScope": false
       },
       "./src/main.ts": {
-        "version": "21ce1febb50a379b32189e965b8a158cd81b68cbe2830a7380cdf75f52ee7b92",
+        "version": "6e07dad812f8a19692fa2148b4c565cbdab3daf11a57909683dfd6a0542ded9b",
         "signature": "298891eab8b266f75d432b64c79cdd73baf992cc0f46cf204f22b2832a978bcf",
         "affectsGlobalScope": false
       },
-      "./src/utils.ts": {
-        "version": "2aba2a6589f8910b47dff0b5a1d8f4edc217d3255871d587c7671695911fc6c3",
-        "signature": "c7f5127cd1dd9ba5acae8e8f219c36ecea3443159d853583471355687c8c961d",
-        "affectsGlobalScope": false
-      },
       "./src/menu.ts": {
-        "version": "25b3088545b8158d579a5e5120138fb8d347bd92933eaba6844f9cbba2db9768",
+        "version": "684998862bdc922e9c2172315e6a636741dbcb3f8cada35ad66d1bfd014802ea",
         "signature": "59e2c955c8a8982806f1caa58e7434b4b37c7805c116a5c212773854289e5c9f",
         "affectsGlobalScope": false
       },
@@ -698,7 +698,8 @@
       ],
       "./src/menuitem.ts": [
         "./src/menu.ts",
-        "./src/types.ts"
+        "./src/types.ts",
+        "./src/utils.ts"
       ],
       "./src/themedcontextmenu.ts": [
         "./src/menu.ts",

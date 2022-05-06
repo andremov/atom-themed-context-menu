@@ -1,0 +1,18 @@
+{
+    "menu": [
+        {
+            "label": "Packages",
+            "submenu": [
+                {
+                    "label": "Themed Context Menu",
+                    "submenu": [
+                        {
+                            "label": "Toggle Context Menu",
+                            "command": "themed-context-menu:toggle-context-menu"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

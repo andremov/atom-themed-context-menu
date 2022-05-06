@@ -69,7 +69,7 @@ export class Menu {
 
 		// add context menu items to context menu
 		items.forEach((element) => {
-			this.addItem(element);
+			this.addItem(element, e.target);
 		});
 
 		this.position = this.getPositionStyleString(e);
@@ -123,8 +123,8 @@ export class Menu {
 	}
 
 	// adds a context menu item to context menu
-	private addItem(item: ContextMenuItemInterface): void {
-		const menuItem = new MenuItem(this, item);
+	private addItem(item: ContextMenuItemInterface, target?: EventTarget): void {
+		const menuItem = new MenuItem(this, item, target);
 		this.items.push(menuItem);
 		this.domElement.appendChild(menuItem.getElement());
 	}
